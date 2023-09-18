@@ -1,0 +1,59 @@
+responses:
+  utter_greet:
+    - text: "Hey! How are you?"
+
+  utter_welcome:
+    - text: "Hi there! What can I help you with today?"
+
+  utter_goodbye:
+    - text: "Bye"
+
+  utter_default:
+    - text: "Sorry, I didn't get that, can you rephrase?"
+
+  utter_pokemon_exists:
+    - text: "Yes, {pokemon_name} is a real Pokémon."
+    - text: "Absolutely! {pokemon_name} is a well-known Pokémon."
+
+  utter_pokemon_no_exist:
+    - text: "No, {pokemon_name} does not exist in the Pokémon world."
+    - text: "I'm sorry, but {pokemon_name} is not a valid Pokémon."
+
+  utter_pokeapi_error:
+    - text: "I apologize, but there was an issue with requesting the Pokémon data. Please try again later."
+    - text: "I'm sorry, but I encountered an error while fetching the Pokémon information. Please try again later."
+
+  utter_confirm_pokemon_type:
+    - text: "Yes, {pokemon_name} is indeed a {pokemon_type} type."
+    - text: "Correct! {pokemon_name} is a {pokemon_type} type."
+
+  utter_deny_pokemon_type:
+    - text: "No, {pokemon_name} is not a {pokemon_type} type."
+    - text: "I'm sorry, but {pokemon_name} is not classified as a {pokemon_type} type."
+
+  utter_pokemon_type:
+    - text: "The type of {pokemon_name} is {pokemon_type}."
+
+  utter_pokemon_types:
+    - text: "The types of {pokemon_name} are {pokemon_types}."
+
+  utter_list_pokemon_types:
+    - text: "There are several types of Pokémon, including:\n{pokemon_types}\n\nThese are the main types, but there are also some dual types where a Pokémon can belong to two types simultaneously. Each type has its own strengths and weaknesses in battles. Let me know if you have any more questions!"
+
+  utter_pokemon_count:
+    - text: "There are {count} Pokémon."
+
+  utter_pokemon_type_count:
+    - text: "There are {count} different types in Pokémon."
+
+  utter_pokemon_name_not_found:
+    - text: "I'm sorry, but I couldn't find the Pokémon name. Please provide the Pokémon name and try again."
+
+  utter_faq/what_is_pokemon:
+    - text: "Pokémon are fictional creatures that exist in the Pokémon world. They come in various species, types, and have unique abilities and characteristics. Trainers can catch and train Pokémon to battle against each other, participate in competitions, and embark on adventures. Each Pokémon has its own set of moves, stats, and evolutionary stages. The goal of many trainers is to complete their Pokédex, a comprehensive encyclopedia that catalogs information about all known Pokémon species. Pokémon has become a popular franchise with video games, trading card games, TV shows, movies, and more."
+
+  utter_faq/ask_berries:
+    - text: "Berries are consumable items that provide various benefits to Pokémon during battles. They can heal HP, cure status conditions, boost stats, weaken wild Pokémon, and more. Examples include Oran Berry (HP restoration), Pecha Berry (poison cure), Sitrus Berry (higher HP restoration), and Lum Berry (status condition cure). Berries are important for strategic gameplay in Pokémon battles."
+
+  utter_faq/ask_complete_pokedex:
+    - text: "To complete your Pokédex, you'll need to catch or obtain every available Pokémon species in the game. This often involves exploring different areas, trading with other players, and evolving Pokémon."

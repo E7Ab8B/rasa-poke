@@ -1,0 +1,8 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST="postgres"
+POSTGRES_PORT="5432"
+POSTGRES_DB="poke_bot"
+POSTGRES_USER="rNV9X2bNczS9WD"
+POSTGRES_PASSWORD="5zdwwCCaJ9QaNpaXp7Dk"
+DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"

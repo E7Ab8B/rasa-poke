@@ -1,0 +1,54 @@
+version: "3.1"
+
+rules:
+  - rule: Welcome User
+    conversation_start: True
+    steps:
+      - intent: greet
+      - action: utter_welcome
+
+  - rule: Fallback
+    steps:
+      - intent: nlu_fallback
+      - action: utter_default
+
+  - rule: Greet anytime the user says hi
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Check for pokemon existence
+    steps:
+      - intent: ask_pokemon_existence
+      - action: action_pokemon_existence
+
+  - rule: Verify Pokémon's type
+    steps:
+      - intent: check_pokemon_type
+      - action: pokemon_type_form
+      - action: action_check_pokemon_type
+
+  - rule: Ask for Pokémon's type
+    steps:
+      - intent: ask_pokemon_type
+      - action: action_get_pokemon_types
+
+  - rule: List Pokémon types
+    steps:
+      - intent: list_pokemon_types
+      - action: action_list_pokemon_types
+
+  - rule: Ask for Pokemon count
+    steps:
+      - intent: how_many_pokemon
+      - action: action_pokemon_count
+
+  - rule: Respond to FAQs
+    steps:
+      - intent: faq
+      - action: utter_faq

@@ -1,0 +1,50 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - ask_pokemon_existence
+  - how_many_pokemon
+  - check_pokemon_type
+  - ask_pokemon_type
+  - list_pokemon_types
+  - nlu_fallback
+
+actions:
+  - action_pokemon_existence
+  - action_check_pokemon_type
+  - action_get_pokemon_types
+  - action_list_pokemon_types
+  - action_pokemon_count
+
+slots:
+  pokemon_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: pokemon_name
+
+  pokemon_type:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: pokemon_type
+
+entities:
+  - pokemon_name
+  - pokemon_type
+
+forms:
+  pokemon_type_form:
+    required_slots:
+      - pokemon_name
+      - pokemon_type
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

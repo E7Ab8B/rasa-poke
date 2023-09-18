@@ -1,0 +1,104 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - Hey
+      - Hello
+      - Hi
+      - Hello there
+      - Good morning
+      - Good evening
+      - Hey there
+      - Goodmorning
+      - Goodevening
+      - Good afternoon
+
+  - intent: goodbye
+    examples: |
+      - Good night
+      - See you later
+      - Bye
+      - Goodbye
+      - Have a nice day
+      - See you around
+      - Bye bye
+      - cu
+
+  - intent: affirm
+    examples: |
+      - Yes
+      - Y
+      - Indeed
+      - Of course
+      - That sounds good
+      - Correct
+
+  - intent: deny
+    examples: |
+      - No
+      - N
+      - Never
+      - I don't think so
+      - Don't like that
+      - No way
+      - Not really
+
+  - intent: ask_pokemon_existence
+    examples: |
+      - Does [Ninetails]{"entity": "pokemon_name"} exist?
+      - Ever heard of [Pikachu]{"entity": "pokemon_name"}
+      - Is [Ditto]{"entity": "pokemon_name"} a Pokémon?
+      - Does [Pikachu]{"entity": "pokemon_name"} exist?
+      - Is [Charizard]{"entity": "pokemon_name"} a real Pokémon?
+      - Can you tell me if [Jigglypuff]{"entity": "pokemon_name"} exists?
+      - Are there any Pokémon named [Mewtwo]{"entity": "pokemon_name"}?
+      - I'm curious, does [Bulbasaur]{"entity": "pokemon_name"} really exist?
+
+  - intent: check_pokemon_type
+    examples: |
+      - Is [Caterpie]{"entity": "pokemon_name"} an [Electric]{"entity": "pokemon_type"} type?
+      - Does [Jolteon]{"entity": "pokemon_name"} belong to the [Fire]{"entity": "pokemon_type"} type?
+      - Is [Gyarados]{"entity": "pokemon_name"} a [Psychic]{"entity": "pokemon_type"} Pokémon?
+      - Does [Gengar]{"entity": "pokemon_name"} have the [Normal]{"entity": "pokemon_type"} type?
+
+  - intent: ask_pokemon_type
+    examples: |
+      - What is the type of [Jigglypuff]{"entity": "pokemon_name"}?
+      - Can you tell me the type of [Lucario]{"entity": "pokemon_name"}?
+      - What type does [Oddish]{"entity": "pokemon_name"} belong to?
+      - Tell me the type of [Squirtle]{"entity": "pokemon_name"}.
+      - What are the types of [Eevee]{"entity": "pokemon_name"}?
+      - What type is [Ninetails]{"entity": "pokemon_name"}?
+
+  - intent: how_many_pokemon
+    examples: |
+      - How many Pokémon are there?
+      - Are there a lot of Pokémon?
+
+  - intent: list_pokemon_types
+    examples: |
+      - Can you tell me all the types of Pokémon?
+      - What are the different types of Pokémon?
+      - List all Pokémon types please
+      - Which types do Pokémon belong to?
+
+  - intent: faq/what_is_pokemon
+    examples: |
+      - What is Pokémon?
+      - Can you tell me what Pokémon is?
+
+  - intent: faq/ask_berries
+    examples: |
+      - What are Pokémon berries?
+      - Tell me about Pokémon berries
+      - What are berries?
+      - What about these berries?
+
+  - intent: faq/ask_complete_pokedex
+    examples: |
+      - How can I complete my Pokédex?
+      - What do I need to do to complete my Pokédex?
+      - Tips for completing the Pokédex?
+      - Any strategies for filling up my Pokédex?
+      - Can you help me with completing my Pokédex?

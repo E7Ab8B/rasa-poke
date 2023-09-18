@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pokédex{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/pokedex.css' %}" />
+{% endblock head %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+
+    {% for pokemon in paginator.object_list %}
+    <div class="col-6 col-sm-4 col-md-3 text-white">
+      <div class="pokemon text-center mb-4 pt-2 pb-2 rounded bg-dark" onclick="location.href='{% url 'pokemon' pokemon.id %}';" style="cursor: pointer;">
+
+        <div class="h4">#{{ pokemon.id|stringformat:"03d" }}</div>
+
+        <div class="image-container">
+          <img
+            src="{{ pokemon.sprites.other.dream_world.front_default }}"
+            alt="{{ pokemon.name.title }}"
+            class="pokemon-image"
+          />
+        </div>
+
+        <div class="h4">{{ pokemon.name.title }}</div>
+
+        <div class="types">
+          {% for type in pokemon.types %}
+            {{ type.type.name.title }}
+            {% if not forloop.last %}/ {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="pagination">
+  {% if page_number > 1 %}
+  <a class="arrow-link" href="?page={{ previous_page_number }}"> &lt; </a>
+  {% endif %}
+  
+  <span class="current-page">Page {{ page_number }} of {{ last_page }}</span>
+
+  {% if page_number < last_page %}
+  <a class="arrow-link" href="?page={{ next_page_number }}"> &gt; </a>
+  {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pokédex{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/berries.css' %}" />
+{% endblock head %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+
+    {% for berry_item in paginator.object_list %}
+    <div class="col-6 col-sm-4 col-md-3 text-white d-flex align-items-stretch">
+      <div class="card berry text-center pt-2 mb-4 rounded bg-dark">
+
+        <h5>#{{ berry_item.berry.id|stringformat:"03d" }}</h5>
+
+        <div class="image-container">
+          <img
+            src="{{ berry_item.item.sprites.default }}"
+            alt="{{ berry_item.berry.name.title }}"
+            class="berry-image"
+          />
+        </div>
+
+        <h5>{{ berry_item.berry.name.title }}</h5>
+
+        <div class="effect mt-1 mb-2 ml-2 mr-2">
+          {{ berry_item.item.effect_entries.0.short_effect }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="pagination">
+  {% if page_number > 1 %}
+  <a class="arrow-link" href="?page={{ previous_page_number }}"> &lt; </a>
+  {% endif %}
+  
+  <span class="current-page">Page {{ page_number }} of {{ last_page }}</span>
+
+  {% if page_number < last_page %}
+  <a class="arrow-link" href="?page={{ next_page_number }}"> &gt; </a>
+  {% endif %}
+</div>
+{% endblock content %}
