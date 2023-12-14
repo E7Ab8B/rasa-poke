@@ -30,25 +30,25 @@ Examples of these environment files are available in the same directory.
 Builds the Docker containers for the local development environment.
 
 ```sh
-docker-compose -f local.yml build
+docker-compose build
 ```
 
 ### Run the Stack
 
 ```sh
-docker compose -f local.yml up
+docker compose up
 ```
 
 To run in a detached (background) mode
 
 ```sh
-docker compose -f local.yml up -d
+docker compose up -d
 ```
 
 ### Train model
 
 ```sh
-docker-compose -f local.yml run --rm django rasa train --fixed-model-name model
+docker-compose run --rm django rasa train --fixed-model-name model
 ```
 
 ## Technologies
