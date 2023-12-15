@@ -9,10 +9,10 @@ from rasa_sdk.events import SlotSet
 
 from .utils.requests import (
     check_pokemon_existence,
+    pokemon_count,
     retrieve_all_pokemon_types,
     retrieve_pokemon_types,
     verify_pokemon_type,
-    pokemon_count,
 )
 
 if TYPE_CHECKING:

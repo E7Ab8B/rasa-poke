@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from rasa_sdk import Tracker, FormValidationAction
+from rasa_sdk import FormValidationAction, Tracker
 from rasa_sdk.types import DomainDict
-
 
 if TYPE_CHECKING:
     from rasa_sdk.executor import CollectingDispatcher
