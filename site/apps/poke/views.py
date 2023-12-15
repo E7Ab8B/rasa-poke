@@ -4,6 +4,7 @@ import logging
 from typing import TYPE_CHECKING
 
 import aiohttp
+
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import redirect, render, reverse
@@ -32,8 +33,8 @@ class PokePaginationMixin:
     def get_page_number(self, request: HttpRequest) -> int:
         """Returns expected page number, which should be passed as `page` param."""
         try:
-            page_number = int(request.GET.get('page', 1))
-        except ValueError:
+            page_number = int(request.GET['page'])  # pyright: ignore[reportGeneralTypeIssues]
+        except (ValueError, KeyError):
             return 1
 
         return max(page_number, 1)
