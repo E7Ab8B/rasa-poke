@@ -1,7 +1,7 @@
 # General
 # ------------------------------------------------------------------------------
-argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
-psycopg2==2.9.5  # https://github.com/psycopg/psycopg2
+argon2-cffi==23.1.0  # https://github.com/hynek/argon2_cffi
+psycopg2==2.9.9  # https://github.com/psycopg/psycopg2
 aiohttp==3.9.1  # https://github.com/aio-libs/aiohttp
 
 # Django
