@@ -4,4 +4,4 @@ Werkzeug==2.2.2  # https://github.com/pallets/werkzeug
 
 # Django
 # ------------------------------------------------------------------------------
-django-debug-toolbar==3.8.1  # https://github.com/jazzband/django-debug-toolbar
+django-debug-toolbar==4.2.0  # https://github.com/jazzband/django-debug-toolbar
