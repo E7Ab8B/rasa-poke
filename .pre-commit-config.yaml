@@ -21,6 +21,7 @@ repos:
     rev: 5.13.2
     hooks:
       - id: isort
+        args: [--resolve-all-configs, --skip-gitignore]
 
   - repo: local
     hooks:
