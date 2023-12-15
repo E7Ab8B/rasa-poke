@@ -59,3 +59,19 @@ repos:
     hooks:
       - id: pyupgrade
         args: [--py310-plus]
+
+  - repo: https://github.com/jazzband/pip-tools
+    rev: 7.3.0
+    hooks:
+      - id: pip-compile
+        name: pip-compile rasa_actions
+        args: [requirements/rasa_actions/requirements.in]
+        files: ^requirements/rasa_actions/requirements\.(in|txt)$
+      - id: pip-compile
+        name: pip-compile site local
+        args: [requirements/site/local.in]
+        files: ^requirements/site/(base|local)\.(in|txt)$
+      - id: pip-compile
+        name: pip-compile local
+        args: [requirements/local/requirements.in]
+        files: ^requirements/(local|rasa_actions|site)/(requirements|base|local)\.(in|txt)$
