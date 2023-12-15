@@ -6,9 +6,7 @@ aiohttp==3.9.1  # https://github.com/aio-libs/aiohttp
 
 # Django
 # ------------------------------------------------------------------------------
-Django==4.1.7  # https://github.com/django/django
-django-extensions==3.2.1  # https://github.com/django-extensions/django-extensions
-django-environ==0.10.0  # https://github.com/joke2k/django-environ
+Django==4.1.13  # https://github.com/django/django
 
 # DRF
 # ------------------------------------------------------------------------------
