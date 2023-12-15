@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Any, Dict, List
+from typing import TYPE_CHECKING, Any
 
 from aiohttp.client_exceptions import ClientError
+
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
 
@@ -34,12 +35,7 @@ class ActionCheckPokemonExistence(Action):
     def name(self) -> str:
         return 'action_pokemon_existence'
 
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[str, Any],
-    ) -> List[Dict[str, Any]]:
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, *args, **kwargs) -> list[dict[str, Any]]:
         pokemon_name = tracker.get_slot('pokemon_name')
 
         if not pokemon_name:
@@ -86,12 +82,7 @@ class ActionVerifyPokemonType(Action):
     def name(self) -> str:
         return 'action_verify_pokemon_type'
 
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[str, Any],
-    ) -> List[Dict[str, Any]]:
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, *args, **kwargs) -> list[dict[str, Any]]:
         pokemon_name = tracker.get_slot('pokemon_name')
         pokemon_type = tracker.get_slot('pokemon_type')
 
@@ -130,12 +121,7 @@ class ActionGetPokemonTypes(Action):
     def name(self) -> str:
         return 'action_get_pokemon_types'
 
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[str, Any],
-    ) -> List[Dict[str, Any]]:
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, *args, **kwargs) -> list[dict[str, Any]]:
         pokemon_name = tracker.get_slot('pokemon_name')
 
         if not pokemon_name:
@@ -174,12 +160,7 @@ class ActionListPokemonTypes(Action):
     def name(self) -> str:
         return 'action_list_pokemon_types'
 
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[str, Any],
-    ) -> List[Dict[str, Any]]:
+    async def run(self, dispatcher: CollectingDispatcher, *args, **kwargs) -> list[dict[str, Any]]:
         try:
             pokemon_types = await retrieve_all_pokemon_types()
         except (ClientError, KeyError):
@@ -206,12 +187,7 @@ class ActionPokemonCount(Action):
     def name(self) -> str:
         return 'action_pokemon_count'
 
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[str, Any],
-    ) -> List[Dict[str, Any]]:
+    async def run(self, dispatcher: CollectingDispatcher, *args, **kwargs) -> list[dict[str, Any]]:
         try:
             count = await pokemon_count()
         except (ClientError, KeyError):
