@@ -86,3 +86,10 @@ notes = ["FIXME", "XXX", "TODO", "BUG", "NOTE"]
 # system, and so shouldn't trigger E1101 when accessed. Python regular
 # expressions are accepted.
 generated-members = "REQUEST, acl_users, aq_parent, \"[a-zA-Z]+_set{1,2}\", save, delete"
+
+
+[tool.pip-tools]
+generate-hashes = true
+strip-extras = true
+# https://github.com/jazzband/pip-tools/issues/806
+allow-unsafe = true
