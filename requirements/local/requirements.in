@@ -10,3 +10,7 @@ pylint-django==2.5.5  # https://github.com/PyCQA/pylint-django
 # Rasa
 # ------------------------------------------------------------------------------
 rasa-sdk==3.7.0  # https://github.com/RasaHQ/rasa-sdk
+
+# Development Tools
+# ------------------------------------------------------------------------------
+pip-tools==7.3.0  # https://github.com/jazzband/pip-tools
