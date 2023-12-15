@@ -5,7 +5,7 @@ volumes:
 
 services:
   rasa:
-    image: rasa/rasa:latest-full
+    image: rasa/rasa:3.5.17-full
     ports:
       - "5005:5005"
     volumes:
@@ -50,7 +50,7 @@ services:
     command: /start
 
   postgres:
-    image: postgres:latest
+    image: postgres:16-bookworm
     ports:
       - "5432:5432"
     env_file:

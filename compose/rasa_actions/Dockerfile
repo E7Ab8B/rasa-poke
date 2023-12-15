@@ -1,5 +1,4 @@
-FROM rasa/rasa-sdk:latest
-
+FROM rasa/rasa-sdk:3.7.0
 
 COPY ./requirements/rasa_actions/requirements.txt .
 USER root
