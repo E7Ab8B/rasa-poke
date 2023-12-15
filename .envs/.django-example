@@ -1,3 +1,3 @@
 # General
 # ------------------------------------------------------------------------------
-DJANGO_SECRET_KEY="c#5@et#o6oc3(zkdnhmi_7d&#cq82)e#%(uetncby41qydix9v"
+DJANGO_SECRET_KEY = "c#5@et#o6oc3(zkdnhmi_7d&#cq82)e#%(uetncby41qydix9v"
