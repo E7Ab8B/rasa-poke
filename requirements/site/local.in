@@ -1,7 +1,6 @@
 -r base.in
 
-watchfiles==0.18.1  # https://github.com/samuelcolvin/watchfiles
-Werkzeug[watchdog]==2.2.2  # https://github.com/pallets/werkzeug
+Werkzeug==2.2.2  # https://github.com/pallets/werkzeug
 
 # Django
 # ------------------------------------------------------------------------------
