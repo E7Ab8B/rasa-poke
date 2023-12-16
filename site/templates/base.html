@@ -50,7 +50,7 @@
       !(function () {
         let e = document.createElement("script"),
             t = document.head || document.getElementsByTagName("head")[0];
-        (e.src = "{% static 'js/dist/chatbot_widget.js' %}"),
+        (e.src = "{% static 'js/chatbot_widget.js' %}"),
         (e.async = !0),
         (e.onload = () => {
           window.ChatbotWidget.default({
