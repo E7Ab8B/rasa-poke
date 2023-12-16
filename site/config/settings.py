@@ -10,7 +10,7 @@ env = environ.Env()
 
 SECRET_KEY = env(
     'DJANGO_SECRET_KEY',
-    default='django-insecure-swzgd!_gv!7_c3ly94z(#f95^++w^qs)!m_l*+$prhmab^xqu*',
+    default='django-insecure-swzgd!_gv!7_c3ly94z(#f95^++w^qs)!m_l*+$prhmab^xqu*',  # pyright: ignore
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
