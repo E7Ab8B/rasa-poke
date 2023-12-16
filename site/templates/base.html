@@ -8,6 +8,12 @@
     <title>{% block title %}PokeSite{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    {% if DEBUG %}
+      <script src="{% static 'js/htmx.min.js' %}" defer></script>
+      <script src="{% static 'js/ext/debug.js' %}" defer></script>
+    {% else %}
+      <script src="{% static 'js/htmx.js' %}" defer></script>
+    {% endif %}
 
     {% block head %}
     {% endblock head %}
