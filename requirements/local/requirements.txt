@@ -122,7 +122,9 @@ argon2-cffi-bindings==21.2.0 \
 asgiref==3.7.2 \
     --hash=sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e \
     --hash=sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
-    # via django
+    # via
+    #   django
+    #   django-htmx
 astroid==3.0.2 \
     --hash=sha256:4a61cf0a59097c7bb52689b0fd63717cd2a8a14dc9f1eee97b82d814881c8c91 \
     --hash=sha256:d6e62862355f60e716164082d6b4b041d38e2a8cf1c7cd953ded5108bac8ff5c
@@ -330,6 +332,7 @@ django==4.1.13 \
     #   -r requirements/local\../site\base.in
     #   django-debug-toolbar
     #   django-extensions
+    #   django-htmx
     #   djangorestframework
 django-debug-toolbar==4.2.0 \
     --hash=sha256:af99128c06e8e794479e65ab62cc6c7d1e74e1c19beb44dcbf9bad7a9c017327 \
@@ -342,6 +345,10 @@ django-environ==0.11.2 \
 django-extensions==3.2.3 \
     --hash=sha256:44d27919d04e23b3f40231c4ab7af4e61ce832ef46d610cc650d53e68328410a \
     --hash=sha256:9600b7562f79a92cbf1fde6403c04fee314608fefbb595502e34383ae8203401
+    # via -r requirements/local\../site\base.in
+django-htmx==1.17.2 \
+    --hash=sha256:4089f2ed38727e9846c2f4cd1daddf6b010c7be8d834cfbcffc8c5ecf445c04e \
+    --hash=sha256:f4971432d2ca45dbb31d9b58add1c50ae54354afe4bf59cafd591b1711b502c0
     # via -r requirements/local\../site\base.in
 djangorestframework==3.14.0 \
     --hash=sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8 \
