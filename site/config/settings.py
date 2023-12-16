@@ -34,7 +34,10 @@ DJANGO_APPS = [
     'django.forms',
 ]
 
-THIRD_PARTY_APPS = ['django_extensions']
+THIRD_PARTY_APPS = [
+    'django_extensions',
+    'django_htmx',
+]
 
 LOCAL_APPS = ['apps.poke']
 
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
