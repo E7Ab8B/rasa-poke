@@ -201,6 +201,7 @@ django==4.1.13 \
     #   django-debug-toolbar
     #   django-extensions
     #   django-htmx
+    #   django-template-partials
     #   djangorestframework
 django-debug-toolbar==4.2.0 \
     --hash=sha256:af99128c06e8e794479e65ab62cc6c7d1e74e1c19beb44dcbf9bad7a9c017327 \
@@ -217,6 +218,10 @@ django-extensions==3.2.3 \
 django-htmx==1.17.2 \
     --hash=sha256:4089f2ed38727e9846c2f4cd1daddf6b010c7be8d834cfbcffc8c5ecf445c04e \
     --hash=sha256:f4971432d2ca45dbb31d9b58add1c50ae54354afe4bf59cafd591b1711b502c0
+    # via -r requirements/site\base.in
+django-template-partials==23.4 \
+    --hash=sha256:d83d9c2d2836be769919e9aaf394d5feb1ac86e1187083030398308070122fca \
+    --hash=sha256:f762b0b7b2222462df0845f0556792640b769eb832eae218a0e7dadd4e5606cc
     # via -r requirements/site\base.in
 djangorestframework==3.14.0 \
     --hash=sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8 \
