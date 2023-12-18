@@ -7,6 +7,24 @@
   <link rel="stylesheet" href="{% static 'css/pokedex.css' %}" />
 {% endblock head %}
 
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">{% partial pokemons %}</div>
+  </div>
+
+  <div class="pagination">
+    {% if page_number > 1 %}
+      <a class="arrow-link" href="?page={{ previous_page_number }}"> &lt; </a>
+    {% endif %}
+
+    <span class="current-page">Page {{ page_number }} of {{ last_page }}</span>
+
+    {% if page_number < last_page %}
+      <a class="arrow-link" href="?page={{ next_page_number }}"> &gt; </a>
+    {% endif %}
+  </div>
+{% endblock content %}
+
 {% partialdef pokemons %}
   {% for pokemon in paginator.object_list %}
     <div class="col-6 col-sm-4 col-md-3 text-white">
@@ -37,21 +55,3 @@
     </div>
   {% endfor %}
 {% endpartialdef %}
-
-{% block content %}
-  <div class="container">
-    <div class="row justify-content-center">{% partial pokemons %}</div>
-  </div>
-
-  <div class="pagination">
-    {% if page_number > 1 %}
-      <a class="arrow-link" href="?page={{ previous_page_number }}"> &lt; </a>
-    {% endif %}
-
-    <span class="current-page">Page {{ page_number }} of {{ last_page }}</span>
-
-    {% if page_number < last_page %}
-      <a class="arrow-link" href="?page={{ next_page_number }}"> &gt; </a>
-    {% endif %}
-  </div>
-{% endblock content %}
