@@ -19,7 +19,7 @@ from .utils.requests import (
 )
 
 if TYPE_CHECKING:
-    from django.http import HttpRequest
+    from apps.poke._types import HtmxHttpRequest
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ class PokePaginationMixin:
     POKE_OFFSET = 20
     POKE_LIMIT = 20
 
-    def get_page_number(self, request: HttpRequest) -> int:
+    def get_page_number(self, request: HtmxHttpRequest) -> int:
         """Returns expected page number, which should be passed as `page` param."""
         try:
             page_number = int(request.GET['page'])  # pyright: ignore[reportGeneralTypeIssues]
@@ -43,7 +43,7 @@ class PokePaginationMixin:
 class PokedexView(PokePaginationMixin, View):
     """View class for displaying the Pokédex."""
 
-    async def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    async def get(self, request: HtmxHttpRequest, *args, **kwargs) -> HttpResponse:
         page_number = self.get_page_number(request)
 
         try:
@@ -94,7 +94,7 @@ class PokedexView(PokePaginationMixin, View):
 class PokemonView(View):
     """View class for displaying information about a specific Pokémon."""
 
-    async def get(self, request: HttpRequest, pokemon_id: int, *args, **kwargs) -> HttpResponse:
+    async def get(self, request: HtmxHttpRequest, pokemon_id: int, *args, **kwargs) -> HttpResponse:
         try:
             pokemon = await retrieve_pokemon(pokemon_id)
         except aiohttp.ContentTypeError:
@@ -110,7 +110,7 @@ class PokemonView(View):
 class BerriesView(PokePaginationMixin, View):
     """View class for displaying the Berries."""
 
-    async def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    async def get(self, request: HtmxHttpRequest, *args, **kwargs) -> HttpResponse:
         page_number = self.get_page_number(request)
 
         try:
