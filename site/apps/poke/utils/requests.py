@@ -109,7 +109,7 @@ class BerryItemInfo(TypedDict):
     item: ItemInfo
 
 
-async def retrieve_pokemon_list(limit: int = 20, offset: int = 20) -> PokemonList:
+async def retrieve_pokemon_list(limit: int = 20, offset: int = 0) -> PokemonList:
     """Retrieves a list of Pokemon from the Poke API."""
     params = {'limit': limit, 'offset': offset}
 
@@ -118,7 +118,7 @@ async def retrieve_pokemon_list(limit: int = 20, offset: int = 20) -> PokemonLis
             return await resp.json()
 
 
-async def retrieve_berries(limit: int = 20, offset: int = 20) -> PokemonList:
+async def retrieve_berries(limit: int = 20, offset: int = 0) -> PokemonList:
     """Retrieves a list of berries from the Poke API."""
     params = {'limit': limit, 'offset': offset}
 
