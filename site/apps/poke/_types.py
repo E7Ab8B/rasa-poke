@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from typing import TypedDict
+from typing import TYPE_CHECKING, TypedDict
+
+from django.http import HttpRequest
+
+if TYPE_CHECKING:
+    from django_htmx.middleware import HtmxDetails
 
 
 class Pokemon(TypedDict):
@@ -96,3 +101,7 @@ class BerryItemInfo(TypedDict):
 
     berry: BerryInfo
     item: ItemInfo
+
+
+class HtmxHttpRequest(HttpRequest):
+    htmx: HtmxDetails
