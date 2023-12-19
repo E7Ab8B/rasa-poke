@@ -109,8 +109,14 @@ class BerryItemInfo(TypedDict):
     item: ItemInfo
 
 
-async def retrieve_pokemon_list(limit: int = 20, offset: int = 0) -> PokemonList:
-    """Retrieves a list of Pokemon from the Poke API."""
+async def retrieve_pokemon_list(limit: int = -1, offset: int = 0) -> PokemonList:
+    """Retrieves a list of Pokemon from the Poke API.
+
+    Args:
+        limit: The maximum number of results to retrieve.  Use ``-1`` to
+            retrieve all results.
+        offset: The offset for paginated results.
+    """
     params = {'limit': limit, 'offset': offset}
 
     async with aiohttp.ClientSession() as session:
@@ -118,8 +124,14 @@ async def retrieve_pokemon_list(limit: int = 20, offset: int = 0) -> PokemonList
             return await resp.json()
 
 
-async def retrieve_berries(limit: int = 20, offset: int = 0) -> PokemonList:
-    """Retrieves a list of berries from the Poke API."""
+async def retrieve_berries(limit: int = -1, offset: int = 0) -> PokemonList:
+    """Retrieves a list of berries from the Poke API.
+
+    Args:
+        limit: The maximum number of results to retrieve.  Use ``-1`` to
+            retrieve all results.
+        offset: The offset for paginated results.
+    """
     params = {'limit': limit, 'offset': offset}
 
     async with aiohttp.ClientSession() as session:
