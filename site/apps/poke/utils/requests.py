@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, TypedDict
 import aiohttp
 
 if TYPE_CHECKING:
-    from typing import Sequence
+    from collections.abc import Sequence
 
 POKEMON_API = 'https://pokeapi.co/api/v2/'
 POKEMON_ENDPOINT = f'{POKEMON_API}pokemon/'
@@ -184,7 +184,7 @@ async def retrieve_multiple_pokemon(pokemon: Sequence[str | int]) -> list[Pokemo
         return await asyncio.gather(*coroutines)
 
 
-async def retrieve_berry_items(berries: Sequence[str | int]) -> list[PokemonInfo]:
+async def retrieve_berry_items(berries: Sequence[str | int]) -> list[BerryItemInfo]:
     """Retrieves detailed info of multiple berries and associated items from the Poke API."""
     assert berries, 'The berries list must not empty.'
 
