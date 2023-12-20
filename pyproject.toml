@@ -9,7 +9,7 @@ venvPath = "."
 venv = ".venv"
 pythonVersion = "3.10"
 exclude = [".venv", "**/migrations"]
-include = ["app"]
+include = ["app", "django-stubs"]
 
 
 [tool.pylint]
