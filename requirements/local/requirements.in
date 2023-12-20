@@ -6,6 +6,7 @@
 pre-commit==3.6.0  # https://github.com/pre-commit/pre-commit
 pylint==3.0.3  # https://github.com/PyCQA/pylint
 pylint-django==2.5.5  # https://github.com/PyCQA/pylint-django
+django-stubs==4.2.7  # https://github.com/typeddjango/django-stubs/
 
 # Rasa
 # ------------------------------------------------------------------------------
