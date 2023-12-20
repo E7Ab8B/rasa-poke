@@ -4,13 +4,20 @@ import logging
 from typing import TYPE_CHECKING
 
 import aiohttp
+from asgiref.sync import async_to_sync
 
+from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
+from django.views.generic.list import ListView
 
-from .utils.requests import (
+from apps.poke.utils.requests import (
     retrieve_berries,
     retrieve_berry_items,
     retrieve_multiple_pokemon,
@@ -19,7 +26,7 @@ from .utils.requests import (
 )
 
 if TYPE_CHECKING:
-    from apps.poke._types import HtmxHttpRequest
+    from apps.poke._types import HtmxHttpRequest, PokemonInfo
 
 logger = logging.getLogger(__name__)
 
@@ -40,55 +47,52 @@ class PokePaginationMixin:
         return max(page_number, 1)
 
 
-class PokedexView(PokePaginationMixin, View):
-    """View class for displaying the Pokédex."""
+@method_decorator(cache_page(60 * 5), name='dispatch')
+@method_decorator(vary_on_headers('HX-Request'), name='dispatch')
+class PokedexView(ListView):
+    """View class for displaying the Pokédex.
 
-    async def get(self, request: HtmxHttpRequest, *args, **kwargs) -> HttpResponse:
-        page_number = self.get_page_number(request)
+    This view class utilizes HTMX for paginating(infinite-scroll) and caching
+    for improved performance.
+    """
 
-        try:
-            pokemon_list = await retrieve_pokemon_list(
-                limit=self.POKE_LIMIT,
-                offset=self.POKE_OFFSET * (page_number - 1),
-            )
-            last_page = pokemon_list['count'] // self.POKE_OFFSET
-        except aiohttp.ClientResponseError:
-            logger.exception('Failed to retrieve pokemon.')
-            return render(
-                request=request,
-                template_name='poke_api_error.html',
-            )
+    paginate_by = 40
+    context_object_name = 'pokemon_list'
+    request: HtmxHttpRequest  # type: ignore[reportGeneralTypeIssues]
 
-        # If wrong offset number was provided and empty results were returned,
-        # redirects to the last page
-        if not pokemon_list['results']:
-            base_url = reverse('pokedex')
-            return redirect(f'{base_url}?page={last_page}')
+    def get_template_names(self) -> list[str]:
+        """Returns the appropriate template name based on the request.
 
-        try:
-            pokemon_info_list = await retrieve_multiple_pokemon(
-                [pokemon['name'] for pokemon in pokemon_list['results']]
-            )
-        except (aiohttp.ClientResponseError, KeyError):
-            logger.exception('Failed to retrieve pokemon.')
-            return render(
-                request=request,
-                template_name='poke_api_error.html',
-            )
+        If the request is an HTMX request, returns the partial template for
+        paginating(infinite-scroll).  Otherwise, returns the full template for
+        regular requests.
+        """
+        if self.request.htmx:
+            return ['pokedex.html#partial-pokemon']
+        return ['pokedex.html']
 
-        context = {
-            'paginator': Paginator(pokemon_info_list, self.POKE_LIMIT),
-            'page_number': page_number,
-            'previous_page_number': page_number - 1,
-            'next_page_number': page_number + 1 if pokemon_list['next'] else None,
-            'last_page': last_page,
-        }
+    def get_queryset(self) -> list[PokemonInfo]:
+        """Returns list of Pokémon for displaying the Pokémon list.
 
-        return render(
-            request=request,
-            template_name='pokedex.html',
-            context=context,
-        )
+        If the list is not present in the cache, retrieves it and caches the
+        result.
+        """
+        pokemon_info_list = cache.get('pokemon_info_list')
+
+        if pokemon_info_list is None:
+            pokemon_info_list = async_to_sync(self.retrieve_pokemon_info_list)()
+            cache.set('pokemon_info_list', pokemon_info_list, timeout=60 * 60)
+
+        return pokemon_info_list
+
+    async def retrieve_pokemon_info_list(self) -> list[PokemonInfo]:
+        """Asynchronously retrieves the list of Pokémon information.
+
+        Uses the :func:`retrieve_pokemon_list` function to get the list of
+        Pokémon names, then fetches details for multiple Pokémon concurrently.
+        """
+        pokemon_list = await retrieve_pokemon_list()
+        return await retrieve_multiple_pokemon([pokemon['name'] for pokemon in pokemon_list['results']])
 
 
 class PokemonView(View):
