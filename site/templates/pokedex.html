@@ -15,7 +15,29 @@
       {% partial partial-pokemon %}
     </div>
   </div>
+
+  {% comment %} Fallback pagination for users without JS {% endcomment %}
+  <div class="pagination" id="pagination">
+    {% if page_obj.has_previous %}
+      <a class="arrow-link" href="?page={{ page_obj.previous_page_number }}"> &lt; </a>
+    {% endif %}
+
+    <span class="current-page">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+      <a class="arrow-link" href="?page={{ page_obj.next_page_number }}"> &gt; </a>
+    {% endif %}
+  </div>
 {% endblock content %}
+
+{% block scripts %}
+  {% comment %} Removes the fallback {% endcomment %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("pagination").style.display = "none";
+    });
+  </script>
+{% endblock scripts %}
 
 {% partialdef partial-pokemon %}
   {% for pokemon in pokemon_list %}
