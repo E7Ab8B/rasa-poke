@@ -15,7 +15,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
-from django.views.generic.list import ListView
+from django.views.generic import ListView, TemplateView
 
 from apps.poke.utils.requests import (
     retrieve_berries,
@@ -95,20 +95,51 @@ class PokedexView(ListView):
         return await retrieve_multiple_pokemon([pokemon['name'] for pokemon in pokemon_list['results']])
 
 
-class PokemonView(View):
-    """View class for displaying information about a specific Pokémon."""
+class PokemonView(TemplateView):
+    """View class for displaying information about a specific Pokémon.
 
-    async def get(self, request: HtmxHttpRequest, pokemon_id: int, *args, **kwargs) -> HttpResponse:
+    Note:
+        Caching individual Pokémon views may not be worthwhile due to the
+        likelihood of frequent updates. Pokémon information is subject to
+        change more frequently, and these views typically contain less data,
+        making it faster to generate response.
+
+        It is more suitable to manage caching strategies at the list level,
+        especially when dealing with more extensive datasets like a Pokédex.
+    """
+
+    request: HtmxHttpRequest  # type: ignore[reportGeneralTypeIssues]
+
+    def get_template_names(self) -> list[str]:
+        """Returns the appropriate template name based on the request.
+
+        If the request is an HTMX request, returns the partial template.
+        Otherwise, returns the full template for regular requests.
+        """
+        if self.request.htmx:
+            return ['pokemon.html#pokemon-info']
+        return ['pokemon.html']
+
+    # The warnings are intentionally ignored for compatibility with Django >= 4.2 (async) and to handle URL parameters
+    async def get(  # pyright: ignore pylint: disable=arguments-differ,invalid-overridden-method
+        self,
+        request: HtmxHttpRequest,
+        pokemon_id: int,
+        *args,
+        **kwargs,
+    ) -> HttpResponse:
+        context = self.get_context_data(**kwargs)
+
         try:
-            pokemon = await retrieve_pokemon(pokemon_id)
+            context['pokemon'] = await retrieve_pokemon(pokemon_id)
         except aiohttp.ContentTypeError:
             return HttpResponseNotFound()
 
-        return render(
-            request=request,
-            template_name='pokemon.html',
-            context={'pokemon': pokemon},
-        )
+        response = self.render_to_response(context)
+        if self.request.htmx:
+            response['HX-Push-Url'] = reverse('pokemon', kwargs={'pokemon_id': pokemon_id})
+
+        return response
 
 
 class BerriesView(PokePaginationMixin, View):
