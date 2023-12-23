@@ -31,22 +31,6 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class PokePaginationMixin:
-    """Mixin class for handling pagination in the Pokédex and Berries views."""
-
-    POKE_OFFSET = 20
-    POKE_LIMIT = 20
-
-    def get_page_number(self, request: HtmxHttpRequest) -> int:
-        """Returns expected page number, which should be passed as `page` param."""
-        try:
-            page_number = int(request.GET['page'])  # pyright: ignore[reportGeneralTypeIssues]
-        except (ValueError, KeyError):
-            return 1
-
-        return max(page_number, 1)
-
-
 @method_decorator(cache_page(60 * 5), name='dispatch')
 @method_decorator(vary_on_headers('HX-Request'), name='dispatch')
 class PokedexView(ListView):
