@@ -53,8 +53,10 @@
         <img src="{% static 'images/pokemon.png' %}" alt="" class="img-fluid">
       </div>
 
-      {% block content %}
-      {% endblock content %}
+      <div id="content">
+        {% block content %}
+        {% endblock content %}
+      </div>
     </div>
 
     <footer class="footer bg-dark text-white text-center pt-4 pb-2">
