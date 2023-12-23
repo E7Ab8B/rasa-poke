@@ -15,7 +15,9 @@
       <div class="col-sm-2 col-md-3 d-flex justify-content-end">
         {% if pokemon.id > 1 %}
           <a class="arrow-link arrow-link-left"
-             href="{% url 'pokemon' pokemon.id|add:"-1" %}">
+             hx-get="{% url 'pokemon' pokemon.id|add:"-1" %}"
+             hx-target="#content"
+             hx-push-url="true">
             <span class="d-flex align-items-center justify-content-center"
                   style="width: 60px;
                          height: 60px">
@@ -79,7 +81,9 @@
 
       <div class="col-sm-1 col-md-3 d-flex justify-content-start">
         <a class="arrow-link arrow-link-right"
-           href="{% url 'pokemon' pokemon.id|add:"1" %}">
+           hx-get="{% url 'pokemon' pokemon.id|add:"1" %}"
+           hx-target="#content"
+           hx-push-url="true">
           <span class="d-flex align-items-center justify-content-center"
                 style="width: 60px;
                        height: 60px">
