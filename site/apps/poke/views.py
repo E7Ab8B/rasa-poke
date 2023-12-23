@@ -7,12 +7,9 @@ import aiohttp
 from asgiref.sync import async_to_sync
 
 from django.core.cache import cache
-from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic import ListView, TemplateView
@@ -26,7 +23,7 @@ from apps.poke.utils.requests import (
 )
 
 if TYPE_CHECKING:
-    from apps.poke._types import HtmxHttpRequest, PokemonInfo
+    from apps.poke._types import BerryItemInfo, HtmxHttpRequest, PokemonInfo
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +39,7 @@ class PokedexView(ListView):
 
     paginate_by = 40
     context_object_name = 'pokemon_list'
-    request: HtmxHttpRequest  # type: ignore[reportGeneralTypeIssues]
+    request: HtmxHttpRequest  # pyright: ignore[reportIncompatibleVariableOverride]
 
     def get_template_names(self) -> list[str]:
         """Returns the appropriate template name based on the request.
@@ -92,7 +89,7 @@ class PokemonView(TemplateView):
         especially when dealing with more extensive datasets like a Pokédex.
     """
 
-    request: HtmxHttpRequest  # type: ignore[reportGeneralTypeIssues]
+    request: HtmxHttpRequest  # pyright: ignore[reportIncompatibleVariableOverride]
 
     def get_template_names(self) -> list[str]:
         """Returns the appropriate template name based on the request.
@@ -126,55 +123,43 @@ class PokemonView(TemplateView):
         return response
 
 
-class BerriesView(PokePaginationMixin, View):
-    """View class for displaying the Berries."""
+@method_decorator(cache_page(60 * 5), name='dispatch')
+class BerriesView(TemplateView):
+    """View class for displaying Berries.
 
-    async def get(self, request: HtmxHttpRequest, *args, **kwargs) -> HttpResponse:
-        page_number = self.get_page_number(request)
+    Note:
+        Pagination is unnecessary as the list of berries is short.
+    """
 
-        try:
-            berries = await retrieve_berries(
-                limit=self.POKE_LIMIT,
-                offset=self.POKE_OFFSET * (page_number - 1),
-            )
-            last_page = berries['count'] // self.POKE_OFFSET
-        except (aiohttp.ClientResponseError, KeyError):
-            logger.exception('Failed to retrieve berries.')
-            return render(
-                request=request,
-                template_name='poke_api_error.html',
-            )
+    template_name = 'berries.html'
+    request: HtmxHttpRequest  # pyright: ignore[reportIncompatibleVariableOverride]
 
-        # If wrong offset number was provided and empty results were returned,
-        # redirects to the last page
-        if not berries['results']:
-            base_url = reverse('berries')
-            return redirect(f'{base_url}?page={last_page}')
+    def get(  # pyright: ignore[reportIncompatibleMethodOverride]
+        self,
+        request: HtmxHttpRequest,
+        *args,
+        **kwargs,
+    ) -> HttpResponse:
+        context = self.get_context_data(**kwargs)
 
-        try:
-            berry_items = await retrieve_berry_items(
-                [berry['name'] for berry in berries['results']],
-            )
-        except aiohttp.ClientResponseError:
-            logger.exception('Failed to retrieve berries.')
-            return render(
-                request=request,
-                template_name='poke_api_error.html',
-            )
+        berry_items_info: list[BerryItemInfo] | None = cache.get('berry_items_info')
 
-        context = {
-            'paginator': Paginator(berry_items, self.POKE_LIMIT),
-            'page_number': page_number,
-            'previous_page_number': page_number - 1,
-            'next_page_number': page_number + 1 if berries['next'] else None,
-            'last_page': last_page,
-        }
+        if berry_items_info is None:
+            berry_items_info = async_to_sync(self.retrieve_berry_items_info)()
+            cache.set('berry_items_info', berry_items_info, timeout=60 * 60)
 
-        return render(
-            request=request,
-            template_name='berries.html',
-            context=context,
-        )
+        context['berry_items_info'] = berry_items_info
+
+        return self.render_to_response(context)
+
+    async def retrieve_berry_items_info(self) -> list[BerryItemInfo]:
+        """Asynchronously retrieves the list of Berries information.
+
+        Uses the :func:`retrieve_berries` function to get the list of
+        Berry names, then fetches details for multiple Berries concurrently.
+        """
+        berries = await retrieve_berries()
+        return await retrieve_berry_items([berry['name'] for berry in berries['results']])
 
 
 pokedex_view = PokedexView.as_view()
