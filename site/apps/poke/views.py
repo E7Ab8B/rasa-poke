@@ -52,11 +52,11 @@ class PokedexView(ListView):
         regular requests.
         """
         if self.request.htmx:
-            return ['pokedex.html#partial-pokemon']
+            return ['pokedex.html#pokemon-list']
         return ['pokedex.html']
 
     def get_queryset(self) -> list[PokemonInfo]:
-        """Returns list of Pokémon for displaying the Pokémon list.
+        """Returns list of Pokémon for displaying the Pokémon.
 
         If the list is not present in the cache, retrieves it and caches the
         result.
