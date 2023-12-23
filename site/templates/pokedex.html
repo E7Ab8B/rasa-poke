@@ -12,7 +12,7 @@
 {% block content %}
   <div class="container">
     <div class="row justify-content-center">
-      {% partial partial-pokemon-list %}
+      {% partial pokemon-list %}
     </div>
   </div>
 
@@ -32,7 +32,7 @@
   </noscript>
 {% endblock content %}
 
-{% partialdef partial-pokemon-list %}
+{% partialdef pokemon-list %}
   {% for pokemon in pokemon_list %}
     {% if forloop.last and page_obj.has_next %}
       <div class="col-6 col-sm-4 col-md-3 text-white"
