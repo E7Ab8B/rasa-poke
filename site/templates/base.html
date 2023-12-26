@@ -1,4 +1,4 @@
-{% load static %}
+{% load static django_htmx %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +15,7 @@
     {% if DEBUG %}
       <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.js" defer></script>
       <script src="https://unpkg.com/htmx.org@1.9.10/dist/ext/debug.js" defer></script>
+      {% django_htmx_script %}
     {% else %}
       <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.min.js" defer></script>
     {% endif %}
