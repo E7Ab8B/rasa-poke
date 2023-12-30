@@ -63,89 +63,61 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="{% url 'pokedex' %}">PokeSite</a>
 
-      <button class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'pokedex' %}">Pokédex</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'berries' %}">Berries</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="container flex-grow-1 content">
-      <div class="logo m-2">
-        <img src="{% static 'images/pokemon.png' %}" alt="" class="img-fluid">
-      </div>
-
-      <div id="content">
+      <div class="container md:max-w-5xl p-4" id="content">
         {% block content %}
         {% endblock content %}
       </div>
-    </div>
 
-    <footer class="footer text-center pt-4 pb-2">
-      © 2023 PokeSite. All rights reserved.
-    </footer>
+      <footer class="footer text-center pt-4 pb-2">
+        © 2023 PokeSite. All rights reserved.
+      </footer>
 
-    <script>
-      !(function() {
-        let e = document.createElement("script"),
-            t = document.head || document.getElementsByTagName("head")[0];
-        (e.src = "{% static 'js/chatbot_widget.js' %}"),
-        (e.async = !0),
-        (e.onload = () => {
-          window.ChatbotWidget.default({
-            rasaServerUrl: "http://localhost:5005/webhooks/rest/webhook",
-            userId: "",
-            initialPayload: "/greet",
-            metadata: {},
-            botAvatar: "{% static 'images/bot-logo.png' %}",
-            widgetColor: "#ffcc00",
-            textColor: "#375aa7",
-            userMsgBackgroundColor: "#e1d7ff",
-            botTitle: "Poke Bot",
-            botSubTitle: "",
-            botMsgBackgroundColor: "#f3f4f6",
-            botResponseDelay: "",
-            chatHeaderCss: {
+      <script>
+        !(function() {
+          let e = document.createElement("script"),
+              t = document.head || document.getElementsByTagName("head")[0];
+          (e.src = "{% static 'js/chatbot_widget.js' %}"),
+          (e.async = !0),
+          (e.onload = () => {
+            window.ChatbotWidget.default({
+              rasaServerUrl: "http://localhost:5005/webhooks/rest/webhook",
+              userId: "",
+              initialPayload: "/greet",
+              metadata: {},
+              botAvatar: "{% static 'images/bot-logo.png' %}",
+              widgetColor: "#ffcc00",
               textColor: "#375aa7",
-              backgroundColor: "#ffcc00",
-              enableBotAvatarBorder: true,
-            },
-            chatHeaderTextColor: "#375aa7",
-            botMsgColor: "#4b5563",
-            userMsgColor: "#375aa7",
-            embedded: false,
-            buttonsCss: {
-              color: "#375aa7",
-              backgroundColor: "#e1d7ff",
-              borderColor: "#4b5563",
-              borderWidth: "0px",
-              borderRadius: "999px",
-              hoverBackgroundColor: "white",
-              hoverColor: "#4b5563",
-              hoverborderWidth: "1px",
-              enableHover: false,
-            },
-          });
-        }),
-        t.insertBefore(e, t.firstChild);
-      })();
-    </script>
-    {% block scripts %}
-    {% endblock scripts %}
-  </body>
-</html>
+              userMsgBackgroundColor: "#e1d7ff",
+              botTitle: "Poke Bot",
+              botSubTitle: "",
+              botMsgBackgroundColor: "#f3f4f6",
+              botResponseDelay: "",
+              chatHeaderCss: {
+                textColor: "#375aa7",
+                backgroundColor: "#ffcc00",
+                enableBotAvatarBorder: true,
+              },
+              chatHeaderTextColor: "#375aa7",
+              botMsgColor: "#4b5563",
+              userMsgColor: "#375aa7",
+              embedded: false,
+              buttonsCss: {
+                color: "#375aa7",
+                backgroundColor: "#e1d7ff",
+                borderColor: "#4b5563",
+                borderWidth: "0px",
+                borderRadius: "999px",
+                hoverBackgroundColor: "white",
+                hoverColor: "#4b5563",
+                hoverborderWidth: "1px",
+                enableHover: false,
+              },
+            });
+          }),
+          t.insertBefore(e, t.firstChild);
+        })();
+      </script>
+      {% block scripts %}
+      {% endblock scripts %}
+    </body>
+  </html>
