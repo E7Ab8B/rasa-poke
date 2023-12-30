@@ -10,7 +10,8 @@
     <title>{% block title %}PokeSite{% endblock title %}</title>
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
 
     {% if DEBUG %}
       <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.js" defer></script>
@@ -60,8 +61,8 @@
       </div>
     </div>
 
-    <footer class="footer bg-dark text-white text-center pt-4 pb-2">
-      <p>© 2023 PokeSite. All rights reserved.</p>
+    <footer class="footer text-center pt-4 pb-2">
+      © 2023 PokeSite. All rights reserved.
     </footer>
 
     <script>
@@ -109,9 +110,6 @@
         t.insertBefore(e, t.firstChild);
       })();
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     {% block scripts %}
     {% endblock scripts %}
   </body>
