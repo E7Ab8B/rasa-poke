@@ -38,6 +38,7 @@ THIRD_PARTY_APPS = [
     'django_extensions',
     'django_htmx',
     'template_partials',
+    'slippers',
 ]
 
 LOCAL_APPS = ['apps.poke']
