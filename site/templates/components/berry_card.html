@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-4 shadow-lg rounded-xl">
+  <div class="mb-4 pt-2 pb-2">
+
+    {% comment %} Sprite {% endcomment %}
+    <div class="bg-pokemon-normal-light p-2 rounded-t-xl">
+      <img src="{{ berry_item.item.sprites.default }}"
+           alt="{{ berry_item.berry.name.title }}"
+           class="h-40 w-40 mx-auto" />
+    </div>
+
+    {% comment %} Info {% endcomment %}
+    <div class="px-4 pt-1">
+      <div class="font-bold capitalize text-center">
+        {{ berry_item.berry.name.title }}
+      </div>
+
+      <div class="mt-2 text-center">
+        {{ berry_item.item.effect_entries.0.short_effect }}
+      </div>
+    </div>
+  </div>
+</div>
