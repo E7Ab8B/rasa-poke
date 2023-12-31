@@ -1,76 +1,21 @@
 {% extends "base.html" %}
-{% load static partials %}
+{% load static partials slippers %}
 
-{% block title %}
-  Pokédex
-{% endblock title %}
-
-{% block head %}
-  <link rel="stylesheet" href="{% static 'css/pokedex.css' %}" />
-{% endblock head %}
+{% block title %}Pokédex{% endblock title %}
 
 {% block content %}
-  <div class="container">
-    <div class="row justify-content-center">
-      {% partial pokemon-list %}
-    </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    {% partial pokemon-list %}
   </div>
 
   {% comment %} Fallback pagination for users without JS {% endcomment %}
   <noscript>
-    <div class="pagination" id="pagination">
-      {% if page_obj.has_previous %}
-        <a class="arrow-link" href="?page={{ page_obj.previous_page_number }}"> &lt; </a>
-      {% endif %}
-
-      <span class="current-page">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
-
-      {% if page_obj.has_next %}
-        <a class="arrow-link" href="?page={{ page_obj.next_page_number }}"> &gt; </a>
-      {% endif %}
-    </div>
+    {% pagination page_obj=page_obj paginator=paginator %}
   </noscript>
 {% endblock content %}
 
 {% partialdef pokemon-list %}
   {% for pokemon in pokemon_list %}
-    {% if forloop.last and page_obj.has_next %}
-      <div class="col-6 col-sm-4 col-md-3 text-white"
-           hx-get="?page={{ page_obj.next_page_number }}"
-           hx-trigger="revealed"
-           hx-swap="afterend">
-    {% else %}
-      <div class="col-6 col-sm-4 col-md-3 text-white">
-    {% endif %}
-    <div class="pokemon text-center mb-4 pt-2 pb-2 rounded bg-dark"
-         hx-get="{% url 'pokemon' pokemon.id %}"
-         hx-target="#content"
-         hx-push-url="true"
-         style="cursor: pointer">
-
-      <div class="h4">
-        #{{ pokemon.id|stringformat:"03d" }}
-      </div>
-
-      <div class="image-container">
-        <img src="{{ pokemon.sprites.other.dream_world.front_default }}"
-             alt="{{ pokemon.name.title }}"
-             class="pokemon-image" />
-      </div>
-
-      <div class="h4">
-        {{ pokemon.name.title }}
-      </div>
-
-      <div class="types">
-        {% for type in pokemon.types %}
-          {{ type.type.name.title }}
-          {% if not forloop.last %}
-            /
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-    </div>
+    {% pokemon_card pokemon=pokemon last_card=forloop.last next_page_number=page_obj.next_page_number %}
   {% endfor %}
 {% endpartialdef %}
