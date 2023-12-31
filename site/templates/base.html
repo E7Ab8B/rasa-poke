@@ -1,4 +1,4 @@
-{% load static django_htmx %}
+{% load static django_htmx slippers %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,65 +118,64 @@
     {% block head %}
     {% endblock head %}
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{% url 'pokedex' %}">PokeSite</a>
+  <body class="bg-white">
+    {% navbar %}
 
-      <div class="container md:max-w-5xl p-4" id="content">
-        {% block content %}
-        {% endblock content %}
-      </div>
+    <div class="container md:max-w-5xl p-4" id="content">
+      {% block content %}
+      {% endblock content %}
+    </div>
 
-      <footer class="footer text-center pt-4 pb-2">
-        © 2023 PokeSite. All rights reserved.
-      </footer>
+    <footer class="footer text-center pt-4 pb-2">
+      © 2023 PokeSite. All rights reserved.
+    </footer>
 
-      <script>
-        !(function() {
-          let e = document.createElement("script"),
-              t = document.head || document.getElementsByTagName("head")[0];
-          (e.src = "{% static 'js/chatbot_widget.js' %}"),
-          (e.async = !0),
-          (e.onload = () => {
-            window.ChatbotWidget.default({
-              rasaServerUrl: "http://localhost:5005/webhooks/rest/webhook",
-              userId: "",
-              initialPayload: "/greet",
-              metadata: {},
-              botAvatar: "{% static 'images/bot-logo.png' %}",
-              widgetColor: "#ffcc00",
+    <script>
+      !(function() {
+        let e = document.createElement("script"),
+            t = document.head || document.getElementsByTagName("head")[0];
+        (e.src = "{% static 'js/chatbot_widget.js' %}"),
+        (e.async = !0),
+        (e.onload = () => {
+          window.ChatbotWidget.default({
+            rasaServerUrl: "http://localhost:5005/webhooks/rest/webhook",
+            userId: "",
+            initialPayload: "/greet",
+            metadata: {},
+            botAvatar: "{% static 'images/bot-logo.png' %}",
+            widgetColor: "#ffcc00",
+            textColor: "#375aa7",
+            userMsgBackgroundColor: "#e1d7ff",
+            botTitle: "Poke Bot",
+            botSubTitle: "",
+            botMsgBackgroundColor: "#f3f4f6",
+            botResponseDelay: "",
+            chatHeaderCss: {
               textColor: "#375aa7",
-              userMsgBackgroundColor: "#e1d7ff",
-              botTitle: "Poke Bot",
-              botSubTitle: "",
-              botMsgBackgroundColor: "#f3f4f6",
-              botResponseDelay: "",
-              chatHeaderCss: {
-                textColor: "#375aa7",
-                backgroundColor: "#ffcc00",
-                enableBotAvatarBorder: true,
-              },
-              chatHeaderTextColor: "#375aa7",
-              botMsgColor: "#4b5563",
-              userMsgColor: "#375aa7",
-              embedded: false,
-              buttonsCss: {
-                color: "#375aa7",
-                backgroundColor: "#e1d7ff",
-                borderColor: "#4b5563",
-                borderWidth: "0px",
-                borderRadius: "999px",
-                hoverBackgroundColor: "white",
-                hoverColor: "#4b5563",
-                hoverborderWidth: "1px",
-                enableHover: false,
-              },
-            });
-          }),
-          t.insertBefore(e, t.firstChild);
-        })();
-      </script>
-      {% block scripts %}
-      {% endblock scripts %}
-    </body>
-  </html>
+              backgroundColor: "#ffcc00",
+              enableBotAvatarBorder: true,
+            },
+            chatHeaderTextColor: "#375aa7",
+            botMsgColor: "#4b5563",
+            userMsgColor: "#375aa7",
+            embedded: false,
+            buttonsCss: {
+              color: "#375aa7",
+              backgroundColor: "#e1d7ff",
+              borderColor: "#4b5563",
+              borderWidth: "0px",
+              borderRadius: "999px",
+              hoverBackgroundColor: "white",
+              hoverColor: "#4b5563",
+              hoverborderWidth: "1px",
+              enableHover: false,
+            },
+          });
+        }),
+        t.insertBefore(e, t.firstChild);
+      })();
+    </script>
+    {% block scripts %}
+    {% endblock scripts %}
+  </body>
+</html>
