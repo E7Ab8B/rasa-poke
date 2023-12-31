@@ -1,41 +1,16 @@
 {% extends "base.html" %}
-{% load static partials %}
+{% load static partials slippers %}
 
-{% block title %}
-  Pokédex
-{% endblock title %}
-
-{% block head %}
-  <link rel="stylesheet" href="{% static 'css/berries.css' %}" />
-{% endblock head %}
+{% block title %}Pokédex - Berries{% endblock title %}
 
 {% block content %}
-  <div class="container">
-    <div class="row justify-content-center">
-      {% for berry_item in berry_items_info %}
-        <div class="col-6 col-sm-4 col-md-3 text-white d-flex align-items-stretch">
-          <div class="card berry text-center pt-2 mb-4 rounded bg-dark">
-
-            <h5>
-              #{{ berry_item.berry.id|stringformat:"03d" }}
-            </h5>
-
-            <div class="image-container">
-              <img src="{{ berry_item.item.sprites.default }}"
-                   alt="{{ berry_item.berry.name.title }}"
-                   class="berry-image" />
-            </div>
-
-            <h5>
-              {{ berry_item.berry.name.title }}
-            </h5>
-
-            <div class="effect mt-1 mb-2 ml-2 mr-2">
-              {{ berry_item.item.effect_entries.0.short_effect }}
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    {% partial berries %}
   </div>
 {% endblock content %}
+
+{% partialdef berries %}
+  {% for berry_item in berry_items_info %}
+    {% berry_card berry_item=berry_item %}
+  {% endfor %}
+{% endpartialdef %}
