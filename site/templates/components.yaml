@@ -1,3 +1,4 @@
 components:
   navbar: "components/navbar.html"
   pokemon_card: "components/pokemon_card.html"
+  pagination: "components/pagination.html"
