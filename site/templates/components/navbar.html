@@ -1,0 +1,14 @@
+{% load static %}
+
+<nav class="bg-pokemon-yellow p-4 justify-between">
+  <div class="container flex items-center space-x-8">
+    {% comment %} Logo {% endcomment %}
+    <a href="{% url "pokedex" %}">
+      <img class="h-10" src="{% static 'images/pokemon.png' %}" alt="Pokemon">
+    </a>
+
+    {% comment %} Navigation links {% endcomment %}
+    <a href="{% url "pokedex" %}" class="text-white text-lg font-bold">Pokedex</a>
+    <a href="{% url "berries" %}" class="text-white text-lg font-bold">Berries</a>
+  </div>
+</nav>
