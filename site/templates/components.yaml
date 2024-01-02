@@ -3,3 +3,4 @@ components:
   pokemon_card: "components/pokemon_card.html"
   pagination: "components/pagination.html"
   berry_card: "components/berry_card.html"
+  pokemon_modal: "components/pokemon_modal.html"

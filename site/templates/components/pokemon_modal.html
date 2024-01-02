@@ -1,0 +1,86 @@
+{% load static slippers pokemon %}
+
+<div class="pointer-events-auto flex w-full bg-gray-50 flex-col rounded-xl h-[500px] bg-clip-padding">
+  {% comment %} Colored background {% endcomment %}
+  <div class="basis-1/3 bg-pokemon-{{ pokemon.types.0.type.name }}-light rounded-t-xl flex flex-row justify-between p-5">
+
+    {% comment %} Icons {% endcomment %}
+    <div class="flex flex-row gap-1">
+      {% for type in pokemon.types %}
+        <div class="bg-pokemon-{{ type.type.name }} h-12 rounded-full">
+          <img src="{% static 'images/pokemon_icons/' %}{{ type.type.name }}.svg"
+               alt="{{ type.type.name }}"
+               class="h-full p-2">
+        </div>
+      {% endfor %}
+    </div>
+
+    {% comment %} Tabs {% endcomment %}
+    <ul>
+      <li>
+      </li>
+      <li>
+      </li>
+      <li>
+      </li>
+    </ul>
+  </div>
+
+  <div class="basis-2/3 flex flex-col items-center p-5 text-black">
+    {% comment %} Sprite {% endcomment %}
+    <div class="flex bg-white rounded-full w-48 h-48 -mt-[120px] inline-block items-center">
+      <img src="{{ pokemon.sprites.other.dream_world.front_default }}"
+           alt="{{ pokemon.name.title }}"
+           class="w-32 h-32 mx-auto">
+    </div>
+
+    {% comment %} Name {% endcomment %}
+    <span class="text-xl font-bold capitalize pt-1">
+      {{ pokemon.name.title }}
+    </span>
+
+    {% comment %} Description {% endcomment %}
+    <span class="text-sm">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+    </span>
+
+    <div class="flex flex-row pt-2 w-full">
+      <div class="basis-1/3 flex flex-col">
+        <div class="text-lg font-bold">
+          Abilities
+        </div>
+
+        {% comment %} List of abilities {% endcomment %}
+        <ul class="pr-4">
+          {% for ability in pokemon.abilities %}
+            <li class="border-b-[1.5px] border-black">
+              {{ ability.ability.name.title }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="basis-2/3">
+        <div class="text-center text-lg font-bold">
+          Stats
+        </div>
+
+        {% comment %} Progress bars {% endcomment %}
+        <div class="flex flex-col gap-1">
+          {% for stat in pokemon.stats %}
+            <div class="flex justify-between text-black">
+              <span class="text-xs font-medium">{{ stat.stat.name.title }}</span>
+              <span class="text-xs font-medium">{{ stat.base_stat }}</span>
+            </div>
+
+            <div class="start w-full overflow-hidden rounded-full bg-[#ddd]">
+              <div class="bg-pokemon-{{ pokemon.types.0.type.name }} p-0.5 leading-none"
+                   style="width: {{ stat.base_stat|stat_percentage }}%">
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
