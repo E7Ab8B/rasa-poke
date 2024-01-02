@@ -2,8 +2,9 @@
      {% if last_card %} hx-get="?page={{ next_page_number }}" hx-trigger="revealed" hx-swap="afterend" {% endif %}>
   <div class="pokemon mb-4 pt-2 pb-2 cursor-pointer"
        hx-get="{% url 'pokemon' pokemon.id %}"
-       hx-target="#content"
-       hx-push-url="true">
+       hx-target="#pokemon-modal-dialog"
+       data-te-toggle="modal"
+       data-te-target="#pokemon-modal">
 
     {% comment %} Sprite {% endcomment %}
     <div class="bg-pokemon-{{ pokemon.types.0.type.name }}-light p-2 rounded-t-xl">
