@@ -1,14 +1,23 @@
 {% load static %}
 
-<nav class="bg-pokemon-yellow p-4 justify-between">
-  <div class="container flex items-center space-x-8">
+<nav class="flex flex-row bg-pokemon-yellow p-4">
+  <div class="w-2/12 items-center">
     {% comment %} Logo {% endcomment %}
     <a href="{% url "pokedex" %}">
       <img class="h-10" src="{% static 'images/pokemon.png' %}" alt="Pokemon">
     </a>
+  </div>
 
-    {% comment %} Navigation links {% endcomment %}
-    <a href="{% url "pokedex" %}" class="text-white text-lg font-bold">Pokedex</a>
-    <a href="{% url "berries" %}" class="text-white text-lg font-bold">Berries</a>
+  {% comment %} Navigation links {% endcomment %}
+  <div class="flex-grow flex items-center justify-evenly">
+    <a href="{% url "pokedex" %}" class="text-white text-lg font-bold">
+      Pokedex
+    </a>
+    <a href="{% url "berries" %}" class="text-white text-lg font-bold">
+      Berries
+    </a>
+  </div>
+
+  <div class="w-2/12">
   </div>
 </nav>
