@@ -8,7 +8,6 @@ from asgiref.sync import async_to_sync
 
 from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseNotFound
-from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
@@ -89,17 +88,8 @@ class PokemonView(TemplateView):
         especially when dealing with more extensive datasets like a Pokédex.
     """
 
+    template_name = 'pokemon.html'
     request: HtmxHttpRequest  # pyright: ignore[reportIncompatibleVariableOverride]
-
-    def get_template_names(self) -> list[str]:
-        """Returns the appropriate template name based on the request.
-
-        If the request is an HTMX request, returns the partial template.
-        Otherwise, returns the full template for regular requests.
-        """
-        if self.request.htmx:
-            return ['pokemon.html#pokemon-info']
-        return ['pokemon.html']
 
     # The warnings are intentionally ignored for compatibility with Django >= 4.2 (async) and to handle URL parameters
     async def get(  # pyright: ignore pylint: disable=arguments-differ,invalid-overridden-method
@@ -116,11 +106,7 @@ class PokemonView(TemplateView):
         except aiohttp.ContentTypeError:
             return HttpResponseNotFound()
 
-        response = self.render_to_response(context)
-        if self.request.htmx:
-            response['HX-Push-Url'] = reverse('pokemon', kwargs={'pokemon_id': pokemon_id})
-
-        return response
+        return self.render_to_response(context)
 
 
 @method_decorator(cache_page(60 * 5), name='dispatch')
