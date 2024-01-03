@@ -118,6 +118,7 @@ asgiref==3.7.2 \
     --hash=sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
     # via
     #   django
+    #   django-browser-reload
     #   django-htmx
 async-timeout==4.0.3 \
     --hash=sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f \
@@ -198,12 +199,18 @@ django==4.1.13 \
     --hash=sha256:94a3f471e833c8f124ee7a2de11e92f633991d975e3fa5bdd91e8abd66426318
     # via
     #   -r requirements/site\base.in
+    #   django-browser-reload
     #   django-debug-toolbar
     #   django-extensions
     #   django-htmx
+    #   django-tailwind
     #   django-template-partials
     #   djangorestframework
     #   slippers
+django-browser-reload==1.12.1 \
+    --hash=sha256:08b457f1b6599bf782d4d2ecdfb0897d6fc936ac4035060d0269c2af5ef4ef7a \
+    --hash=sha256:875b6bd01db13380522ccb4ae75871a2edeae74bb5ac92bf32eb76763d575d86
+    # via django-tailwind
 django-debug-toolbar==4.2.0 \
     --hash=sha256:af99128c06e8e794479e65ab62cc6c7d1e74e1c19beb44dcbf9bad7a9c017327 \
     --hash=sha256:bc7fdaafafcdedefcc67a4a5ad9dac96efd6e41db15bc74d402a54a2ba4854dc
@@ -220,6 +227,12 @@ django-htmx==1.17.2 \
     --hash=sha256:4089f2ed38727e9846c2f4cd1daddf6b010c7be8d834cfbcffc8c5ecf445c04e \
     --hash=sha256:f4971432d2ca45dbb31d9b58add1c50ae54354afe4bf59cafd591b1711b502c0
     # via -r requirements/site\base.in
+django-tailwind==3.8.0 \
+    --hash=sha256:31c2f4a7879d685c2de0feaf0b63f246200b37337bea4d7dbafb59bc3f10c008 \
+    --hash=sha256:fa969c5b95d314b173fe2b2ed2cb2c03f2e2c94fdc2c01ff73a993fa159085da
+    # via
+    #   -r requirements/site\base.in
+    #   django-tailwind
 django-template-partials==23.4 \
     --hash=sha256:d83d9c2d2836be769919e9aaf394d5feb1ac86e1187083030398308070122fca \
     --hash=sha256:f762b0b7b2222462df0845f0556792640b769eb832eae218a0e7dadd4e5606cc

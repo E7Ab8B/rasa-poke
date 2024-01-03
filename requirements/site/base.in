@@ -12,6 +12,7 @@ django-environ==0.11.2  # https://github.com/joke2k/django-environ
 django-htmx==1.17.2  # https://github.com/adamchainz/django-htmx
 django-template-partials==23.4  # https://github.com/carltongibson/django-template-partials
 slippers==0.6.2  # https://github.com/mixxorz/slippers
+django-tailwind[reload]==3.8.0  # https://github.com/timonweb/django-tailwind
 
 # DRF
 # ------------------------------------------------------------------------------
