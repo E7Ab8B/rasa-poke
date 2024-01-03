@@ -1,7 +1,7 @@
 version: "3"
 
 volumes:
-  poke_postgres_data: {}
+  poke-postgres-data: {}
 
 services:
   rasa:
@@ -21,10 +21,12 @@ services:
       - django
       - postgres
 
-  rasa_actions:
+  rasa-actions:
     build:
       context: .
       dockerfile: ./compose/rasa_actions/Dockerfile
+    image: poke-rasa-actions
+    container_name: poke-rasa-actions
     ports:
       - "5055:5055"
     volumes:
@@ -36,8 +38,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
-    image: poke_django
-    container_name: poke_django
+    image: poke-django
+    container_name: poke-django
     depends_on:
       - postgres
     volumes:
