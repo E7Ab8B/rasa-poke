@@ -39,9 +39,14 @@ THIRD_PARTY_APPS = [
     'django_htmx',
     'template_partials',
     'slippers',
+    'tailwind',
+    'django_browser_reload',
 ]
 
-LOCAL_APPS = ['apps.poke']
+LOCAL_APPS = [
+    'apps.poke',
+    'apps.theme',
+]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -54,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
 ]
 
@@ -112,6 +118,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# django-tailwind
+TAILWIND_APP_NAME = "apps.theme"
 
 # STATIC
 # ------------------------------------------------------------------------------
