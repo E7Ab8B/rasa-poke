@@ -51,6 +51,20 @@ services:
       - "8000:8000"
     command: /start
 
+  tailwind:
+    build:
+      context: .
+      dockerfile: ./compose/tailwind/Dockerfile
+    container_name: poke-tailwind
+    volumes:
+      - ./site:/app:z
+    env_file:
+      - ./.envs/.django
+      - ./.envs/.postgres
+    # Without tty, no stdin, and tailwind watcher aborts
+    # https://github.com/tailwindlabs/tailwindcss/issues/5324
+    tty: true
+
   postgres:
     image: postgres:16-bookworm
     ports:
