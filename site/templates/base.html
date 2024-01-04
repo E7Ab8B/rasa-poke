@@ -1,4 +1,4 @@
-{% load static django_htmx slippers %}
+{% load static django_htmx slippers tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +9,7 @@
 
     <title>{% block title %}PokeSite{% endblock title %}</title>
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    {% tailwind_css %}
 
     {% if DEBUG %}
       <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.js" defer></script>
@@ -19,101 +18,6 @@
     {% else %}
       <script src="https://unpkg.com/htmx.org@1.9.10/dist/htmx.min.js" defer></script>
     {% endif %}
-
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "pokemon-yellow": "#ffcc00",
-              "pokemon-bug": {
-                light: "#ecf3df",
-                DEFAULT: "#94bc4a"
-              },
-              "pokemon-dark": {
-                light: "#cfccd0",
-                DEFAULT: "#736c75"
-              },
-              "pokemon-dragon": {
-                light: "#d9ddea",
-                DEFAULT: "#6a7baf"
-              },
-              "pokemon-electric": {
-                light: "#f8f0c8",
-                DEFAULT: "#e5c531"
-              },
-              "pokemon-fairy": {
-                light: "#fcf5fa",
-                DEFAULT: "#e397d1"
-              },
-              "pokemon-fire": {
-                light: "#fbe3d5",
-                DEFAULT: "#ea7a3c"
-              },
-              "pokemon-grass": {
-                light: "#e7f5e3",
-                DEFAULT: "#71c558"
-              },
-              "pokemon-steel": {
-                light: "#e5eaed",
-                DEFAULT: "#89a1b0"
-              },
-              "pokemon-water": {
-                light: "#e4effb",
-                DEFAULT: "#539ae2"
-              },
-              "pokemon-psychic": {
-                light: "#fdf1f6",
-                DEFAULT: "#e5709b"
-              },
-              "pokemon-ground": {
-                light: "#f6eee0",
-                DEFAULT: "#cc9f4f"
-              },
-              "pokemon-ice": {
-                light: "#e6f6f7",
-                DEFAULT: "#70cbd4"
-              },
-              "pokemon-flying": {
-                light: "#e9f0fa",
-                DEFAULT: "#7da6de"
-              },
-              "pokemon-ghost": {
-                light: "#e2dcee",
-                DEFAULT: "#846ab6"
-              },
-              "pokemon-normal": {
-                light: "#ecedea",
-                DEFAULT: "#aab09f"
-              },
-              "pokemon-poison": {
-                light: "#f3e7f3",
-                DEFAULT: "#b468b7"
-              },
-              "pokemon-rock": {
-                light: "#efecdf",
-                DEFAULT: "#b2a061"
-              },
-              "pokemon-fighting": {
-                light: "#f8eae7",
-                DEFAULT: "#cb5f48"
-              },
-              "pokemon-shadow": {
-                light: "#f0edf5",
-                DEFAULT: "#7b62a3"
-              },
-              "pokemon-unknown": {
-                light: "#f4f4f4",
-                DEFAULT: "#757575"
-              },
-            },
-          },
-          container: {
-            center: true,
-          },
-        },
-      };
-    </script>
 
     {% block head %}
     {% endblock head %}
@@ -175,7 +79,6 @@
         t.insertBefore(e, t.firstChild);
       })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
     {% block scripts %}
     {% endblock scripts %}
   </body>
