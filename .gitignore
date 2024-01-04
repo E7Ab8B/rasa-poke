@@ -70,6 +70,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Dependency directories
+node_modules/
+
 # Spyder project settings
 .spyderproject
 .spyproject
