@@ -22,7 +22,7 @@ ITEM_ENDPOINT = f'{POKEMON_API}item/'
 BERRY_ENDPOINT = f'{POKEMON_API}berry/'
 
 
-async def retrieve_pokemon_list(limit: int = -1, offset: int = 0) -> PokemonList:
+async def retrieve_pokemon_list(*, limit: int = -1, offset: int = 0) -> PokemonList:
     """Retrieves a list of Pokemon from the Poke API.
 
     Args:
@@ -37,7 +37,7 @@ async def retrieve_pokemon_list(limit: int = -1, offset: int = 0) -> PokemonList
             return await resp.json()
 
 
-async def retrieve_berries(limit: int = -1, offset: int = 0) -> PokemonList:
+async def retrieve_berries(*, limit: int = -1, offset: int = 0) -> PokemonList:
     """Retrieves a list of berries from the Poke API.
 
     Args:
