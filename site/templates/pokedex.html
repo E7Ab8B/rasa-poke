@@ -4,26 +4,42 @@
 {% block title %}Pokédex{% endblock title %}
 
 {% block content %}
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4"
+       x-data="{ showPokemonModal: false }">
     {% partial pokemon-list %}
+
+    <div id="pokemon-modal"
+         aria-labelledby="pokemon-modal-title"
+         aria-modal="true"
+         tabindex="0"
+         x-show="showPokemonModal"
+         class="fixed left-0 top-0 h-full w-full">
+      <div aria-hidden="true"
+           :class="{ 'opacity-60': showPokemonModal, 'opacity-0': !showPokemonModal }"
+           x-show="showPokemonModal"
+           x-transition:leave="delay-150"
+           class="absolute top-0 left-0 w-full h-screen bg-black transition duration-300">
+      </div>
+      <div id="pokemon-modal-dialog"
+           @click.away="showPokemonModal = false"
+           @htmx:after-swap="showPokemonModal = true;"
+           @htmx:before-swap="if($event.detail.xhr.status != 200) { showPokemonModal = false; $event.detail.shouldSwap = false;}"
+           x-show="showPokemonModal"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="transform scale-50 opacity-0"
+           x-transition:enter-end="transform scale-100 opacity-100"
+           x-transition:leave="transition ease-out duration-300"
+           x-transition:leave-start="transform scale-100 opacity-100"
+           x-transition:leave-end="transform scale-50 opacity-0"
+           class="pointer-events-none relative flex min-h-[calc(100%-1rem)] z-10 w-auto items-center min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px] overflow-y-auto overflow-x-hidden outline-none">
+      </div>
+    </div>
   </div>
 
   {% comment %} Fallback pagination for users without JS {% endcomment %}
   <noscript>
     {% pagination page_obj=page_obj paginator=paginator %}
   </noscript>
-
-  <div id="pokemon-modal"
-       data-te-modal-init
-       class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-       tabindex="-1"
-       aria-modal="true"
-       role="dialog">
-    <div id="pokemon-modal-dialog"
-         data-te-modal-dialog-ref
-         class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
-    </div>
-  </div>
 
 {% endblock content %}
 
