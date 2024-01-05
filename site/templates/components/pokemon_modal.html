@@ -28,14 +28,14 @@
 
   <div class="basis-2/3 flex flex-col items-center p-5 text-black">
     {% comment %} Sprite {% endcomment %}
-    <div class="bg-white rounded-full w-48 h-48 -mt-[120px] inline-block items-center">
+    <div class="flex bg-white rounded-full w-48 h-48 -mt-[120px] items-center">
       <img src="{{ pokemon.sprites.other.dream_world.front_default }}"
            alt="{{ pokemon.name.title }}"
            class="w-32 h-32 mx-auto">
     </div>
 
     {% comment %} Name {% endcomment %}
-    <span class="text-xl font-bold capitalize pt-1">
+    <span id="pokemon-modal-title" class="text-xl font-bold capitalize pt-1">
       {{ pokemon.name.title }}
     </span>
 
