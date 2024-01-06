@@ -4,24 +4,25 @@ responses:
 
   utter_welcome:
     - text: "Hi there! What can I help you with today?"
+    - text: "Greetings! How may I assist you today?"
 
   utter_goodbye:
-    - text: "Bye"
+    - text: "Farewell! If you have any more questions in the future, don't hesitate to ask."
+    - text: "Goodbye! If you have more questions, feel free to return."
 
   utter_default:
-    - text: "Sorry, I didn't get that, can you rephrase?"
+    - text: "I apologize, but I didn't quite catch that. Could you please rephrase or provide more details?"
 
   utter_pokemon_exists:
     - text: "Yes, {pokemon_name} is a real Pokémon."
-    - text: "Absolutely! {pokemon_name} is a well-known Pokémon."
+    - text: "Certainly! {pokemon_name} is a well-documented Pokémon."
 
   utter_pokemon_no_exist:
     - text: "No, {pokemon_name} does not exist in the Pokémon world."
     - text: "I'm sorry, but {pokemon_name} is not a valid Pokémon."
 
   utter_pokeapi_error:
-    - text: "I apologize, but there was an issue with requesting the Pokémon data. Please try again later."
-    - text: "I'm sorry, but I encountered an error while fetching the Pokémon information. Please try again later."
+    - text: "I apologize for the inconvenience. There seems to be an issue with retrieving Pokémon data. Please try again later."
 
   utter_confirm_pokemon_type:
     - text: "Yes, {pokemon_name} is indeed a {pokemon_type} type."
@@ -45,13 +46,13 @@ responses:
     - text: "There are several types of Pokémon, including:\n{pokemon_types}\n\nThese are the main types, but there are also some dual types where a Pokémon can belong to two types simultaneously. Each type has its own strengths and weaknesses in battles. Let me know if you have any more questions!"
 
   utter_pokemon_count:
-    - text: "There are {count} Pokémon."
+    - text: "As of now, there are {count} Pokémon in the Pokémon world."
 
   utter_pokemon_type_count:
-    - text: "There are {count} different types in Pokémon."
+    - text: "There are {count} different types of Pokémon."
 
   utter_pokemon_name_not_found:
-    - text: "I'm sorry, but I couldn't find the Pokémon name. Please provide the Pokémon name and try again."
+    - text: "I'm sorry, but I couldn't find information for the Pokémon name you provided. Please ensure the name is correct and try again."
 
   utter_faq/what_is_pokemon:
     - text: "Pokémon are fictional creatures that exist in the Pokémon world. They come in various species, types, and have unique abilities and characteristics. Trainers can catch and train Pokémon to battle against each other, participate in competitions, and embark on adventures. Each Pokémon has its own set of moves, stats, and evolutionary stages. The goal of many trainers is to complete their Pokédex, a comprehensive encyclopedia that catalogs information about all known Pokémon species. Pokémon has become a popular franchise with video games, trading card games, TV shows, movies, and more."
