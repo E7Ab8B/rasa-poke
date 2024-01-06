@@ -32,10 +32,14 @@ responses:
     - text: "I'm sorry, but {pokemon_name} is not classified as a {pokemon_type} type."
 
   utter_pokemon_type:
-    - text: "The type of {pokemon_name} is {pokemon_type}."
+    - text: "{pokemon_name} is classified as a {pokemon_type} type."
+    - text: "{pokemon_name} belongs to the {pokemon_type} type."
+    - text: "{pokemon_name} is identified as a {pokemon_type} type Pokémon."
+    - text: "{pokemon_name} exhibits the characteristics of a {pokemon_type} type."
 
   utter_pokemon_types:
-    - text: "The types of {pokemon_name} are {pokemon_types}."
+    - text: "{pokemon_name} is a Pokémon of {pokemon_types} types, showcasing a formidable combination."
+    - text: "The distinct strengths of {pokemon_name} lie in its dual types – {pokemon_types}. A well-rounded force to be reckoned with."
 
   utter_list_pokemon_types:
     - text: "There are several types of Pokémon, including:\n{pokemon_types}\n\nThese are the main types, but there are also some dual types where a Pokémon can belong to two types simultaneously. Each type has its own strengths and weaknesses in battles. Let me know if you have any more questions!"
