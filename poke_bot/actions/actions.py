@@ -168,7 +168,7 @@ class ActionListPokemonTypes(Action):
             dispatcher.utter_message(response='utter_pokeapi_error')
             return []
 
-        pokemon_types = "\n".join(f"- {type_name.title()}" for type_name in pokemon_types)
+        pokemon_types = "\n".join(f"• {type_name.title()}" for type_name in pokemon_types)
 
         dispatcher.utter_message(
             response='utter_list_pokemon_types',
