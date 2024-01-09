@@ -52,6 +52,6 @@
 
 {% partialdef pokemon-list %}
   {% for pokemon in pokemon_list %}
-    {% pokemon_card pokemon=pokemon last_card=forloop.last next_page_number=page_obj.next_page_number %}
+    {% pokemon_card pokemon=pokemon last_card=forloop.last page_obj=page_obj %}
   {% endfor %}
 {% endpartialdef %}

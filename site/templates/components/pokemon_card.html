@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="flex flex-col gap-4 shadow-lg rounded-xl"
-     {% if last_card %} hx-get="?page={{ next_page_number }}" hx-trigger="revealed" hx-swap="afterend" {% endif %}>
+     {% if last_card and page_obj.has_next %} hx-get="?page={{ page_obj.next_page_number }}&q={{ request.GET.q|urlencode }}" hx-trigger="revealed" hx-swap="afterend" {% endif %}>
   <div class="mb-3 py-2 cursor-pointer"
        hx-get="{% url 'pokemon' pokemon.id %}"
        hx-target="#pokemon-modal-dialog">
