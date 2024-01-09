@@ -4,10 +4,17 @@
 {% block title %}Pokédex{% endblock title %}
 
 {% block content %}
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4"
-       x-data="{ showPokemonModal: false }">
-    {% partial pokemon-list %}
+  <div class="m-4 mx-auto w-96">
+    {% search_pokemon %}
+  </div>
 
+  <div x-data="{ showPokemonModal: false }">
+    {% comment %} Pokemon List {% endcomment %}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4"  id="pokemon-list">
+      {% partial pokemon-list %}
+    </div>
+
+    {% comment %} Pokemon Modal {% endcomment %}
     <div id="pokemon-modal"
          aria-labelledby="pokemon-modal-title"
          aria-modal="true"
