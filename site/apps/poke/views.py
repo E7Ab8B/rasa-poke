@@ -63,7 +63,15 @@ class PokedexView(ListView):
             pokemon_info_list = async_to_sync(self.retrieve_pokemon_info_list)()
             cache.set('pokemon_info_list', pokemon_info_list, timeout=60 * 60)
 
+        query = self.request.GET.get("q")
+        if query:
+            pokemon_info_list = self.filter_pokemon_by_name(pokemon_info_list, query)
+
         return pokemon_info_list
+
+    def filter_pokemon_by_name(self, pokemon_info_list: list[PokemonInfo], query: str) -> list[PokemonInfo]:
+        query = query.lower()
+        return [pokemon_info for pokemon_info in pokemon_info_list if query in pokemon_info['name'].lower()]
 
     async def retrieve_pokemon_info_list(self) -> list[PokemonInfo]:
         """Asynchronously retrieves the list of Pokémon information.
