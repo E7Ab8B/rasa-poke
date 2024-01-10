@@ -4,4 +4,4 @@ components:
   pagination: "components/pagination.html"
   berry_card: "components/berry_card.html"
   pokemon_modal: "components/pokemon_modal.html"
-  search_pokemon: "components/search_pokemon.html"
+  search_bar_pokedex: "components/search_bar_pokedex.html"

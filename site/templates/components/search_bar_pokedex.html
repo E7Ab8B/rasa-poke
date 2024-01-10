@@ -1,0 +1,9 @@
+
+<input type="search"
+       class="relative m-0 block w-full min-w-0 flex-auto rounded border-[0.1rem] border-solid border-neutral-500 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-600 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none placeholder:text-neutral-200"
+       id="search"
+       name="q"
+       placeholder="Search Pokémon"
+       hx-get="{% url 'pokedex' %}"
+       hx-trigger="input changed delay:500ms, search"
+       hx-target="#pokemon-list" />
