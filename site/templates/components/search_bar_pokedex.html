@@ -6,4 +6,5 @@
        placeholder="Search Pokémon"
        hx-get="{% url 'pokedex' %}"
        hx-trigger="input changed delay:500ms, search"
-       hx-target="#pokemon-list" />
+       hx-target="#pokemon-list"
+       hx-headers="{'X-CSRFToken': '{{ csrf_token }}'}" />
