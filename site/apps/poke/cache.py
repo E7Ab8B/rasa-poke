@@ -13,27 +13,26 @@ if TYPE_CHECKING:
 
 
 class NoQueryParamCacheMiddleware(CacheMiddleware):
-    """Cache middleware to bypass caching for requests with query parameters.
+    """Cache middleware bypassing caching for requests with the "q" parameter.
 
     Inherits from `CacheMiddleware` and overrides the `process_request` method.
-    If the request has query parameters, caching is bypassed for that request.
     """
 
     def process_request(self, request: HttpRequest) -> HttpResponse | None:
-        if not request.GET:
+        if 'q' not in request.GET:
             return super().process_request(request)
 
         request._cache_update_cache = False  # pyright: ignore[reportGeneralTypeIssues] pylint: disable=protected-access
         return None
 
 
-def cache_page_without_params(
+def cache_page_without_q_param(
     timeout: float,
     *,
     cache: Any | None = None,
     key_prefix: Any | None = None,
 ) -> Callable[[_F], _F]:
-    """Decorator to cache a view only when there are no query parameters."""
+    """Decorator for caching a view when the "q" query parameter is absent."""
     return decorator_from_middleware_with_args(NoQueryParamCacheMiddleware)(
         page_timeout=timeout,
         cache_alias=cache,

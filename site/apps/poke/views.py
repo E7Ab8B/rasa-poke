@@ -13,7 +13,7 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic import ListView, TemplateView
 
-from apps.poke.cache import cache_page_without_params
+from apps.poke.cache import cache_page_without_q_param
 from apps.poke.utils.requests import (
     retrieve_berries,
     retrieve_berry_items,
@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-@method_decorator(cache_page_without_params(60 * 5), name='dispatch')
+@method_decorator(cache_page_without_q_param(60 * 5), name='dispatch')
 @method_decorator(vary_on_headers('HX-Request'), name='dispatch')
 class PokedexView(ListView):
     """View class for displaying the Pokédex.
