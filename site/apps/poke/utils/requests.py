@@ -62,7 +62,7 @@ async def retrieve_pokemon(pokemon: str | int) -> PokemonInfo:
 async def _retrieve_pokemon(session: aiohttp.ClientSession, pokemon: str | int) -> PokemonInfo:
     """Retrieves Pokemon information from the Poke API.
 
-    Used for fetching multiple Pokemon concurrently. The session must be provided.
+    Used for fetching multiple Pokemon concurrently.
     """
     async with session.get(f'{POKEMON_ENDPOINT}{pokemon}') as resp:
         return await resp.json()
@@ -71,7 +71,7 @@ async def _retrieve_pokemon(session: aiohttp.ClientSession, pokemon: str | int) 
 async def _retrieve_berry(session: aiohttp.ClientSession, berry: str | int) -> BerryInfo:
     """Retrieves berry information from the Poke API.
 
-    Used for fetching multiple berries concurrently. The session must be provided.
+    Used for fetching multiple berries concurrently.
     """
     async with session.get(f'{BERRY_ENDPOINT}{berry}') as resp:
         return await resp.json()
@@ -80,7 +80,7 @@ async def _retrieve_berry(session: aiohttp.ClientSession, berry: str | int) -> B
 async def _retrieve_item(session: aiohttp.ClientSession, item: str | int) -> ItemInfo:
     """Retrieves item information from the Poke API.
 
-    Used for fetching multiple items concurrently. The session must be provided.
+    Used for fetching multiple items concurrently.
     """
     async with session.get(f'{ITEM_ENDPOINT}{item}') as resp:
         return await resp.json()
