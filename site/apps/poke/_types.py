@@ -8,7 +8,7 @@ from django_htmx.middleware import HtmxDetails
 
 
 class Pokemon(TypedDict):
-    """Basic Pokemon information that exists in the Pokemon list endpoint."""
+    """Represents basic information about a Pokemon."""
 
     name: str
     url: str
@@ -24,14 +24,14 @@ class PokemonList(TypedDict):
 
 
 class Stat(TypedDict):
-    """Stat information of a Pokemon."""
+    """Represents the base information of a Pokemon's stat."""
 
     name: int
     url: int
 
 
 class StatInfo(TypedDict):
-    """Detailed information about a Pokemon's stat."""
+    """Represents detailed information about a Pokemon's stat."""
 
     base_stat: int
     effort: int
@@ -39,21 +39,21 @@ class StatInfo(TypedDict):
 
 
 class Type(TypedDict):
-    """Type information of a Pokemon."""
+    """Represents the base information of a Pokemon's type."""
 
     name: str
     url: str
 
 
 class TypeInfo(TypedDict):
-    """Detailed information about a Pokemon's type."""
+    """Represents detailed information about a Pokemon's type."""
 
     slot: int
     type: Type
 
 
 class PokemonInfo(TypedDict):
-    """Detailed Pokemon information which is returned on a detail endpoint."""
+    """Represents detailed information about a Pokemon."""
 
     id: int
     name: str
@@ -64,7 +64,7 @@ class PokemonInfo(TypedDict):
 
 
 class EffectEntry(TypedDict):
-    """Entry describing the effect of an item or ability."""
+    """Represents an entry describing the effect of an item or ability."""
 
     effect: str
     short_effect: str
@@ -88,7 +88,7 @@ class ItemInfo(TypedDict):
 
 
 class BerryInfo(TypedDict):
-    """Information about a berry."""
+    """Represents information about a berry."""
 
     id: int
     name: str
@@ -96,7 +96,7 @@ class BerryInfo(TypedDict):
 
 
 class BerryItemInfo(TypedDict):
-    """Detailed information about a berry."""
+    """Represents detailed information about a berry and its corresponding item."""
 
     berry: BerryInfo
     item: ItemInfo
