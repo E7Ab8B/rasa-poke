@@ -19,7 +19,7 @@ class NoQueryParamCacheMiddleware(CacheMiddleware):
     """
 
     def process_request(self, request: HttpRequest) -> HttpResponse | None:
-        if 'q' not in request.GET:
+        if not request.GET.get('q'):
             return super().process_request(request)
 
         request._cache_update_cache = False  # pyright: ignore[reportGeneralTypeIssues] pylint: disable=protected-access
