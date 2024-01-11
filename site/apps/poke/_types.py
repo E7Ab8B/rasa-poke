@@ -7,7 +7,7 @@ from django.http import HttpRequest
 from django_htmx.middleware import HtmxDetails
 
 
-class Pokemon(TypedDict):
+class PokemonBase(TypedDict):
     """Represents basic information about a Pokemon."""
 
     name: str
@@ -20,47 +20,47 @@ class PokemonList(TypedDict):
     count: int
     next: str
     previous: str
-    results: list[Pokemon]
+    results: list[PokemonBase]
 
 
-class Stat(TypedDict):
+class StatBase(TypedDict):
     """Represents the base information of a Pokemon's stat."""
 
     name: int
     url: int
 
 
-class StatInfo(TypedDict):
+class Stat(TypedDict):
     """Represents detailed information about a Pokemon's stat."""
 
     base_stat: int
     effort: int
-    stat: Stat
+    stat: StatBase
 
 
-class Type(TypedDict):
+class TypeBase(TypedDict):
     """Represents the base information of a Pokemon's type."""
 
     name: str
     url: str
 
 
-class TypeInfo(TypedDict):
+class Type(TypedDict):
     """Represents detailed information about a Pokemon's type."""
 
     slot: int
-    type: Type
+    type: TypeBase
 
 
-class PokemonInfo(TypedDict):
+class Pokemon(TypedDict):
     """Represents detailed information about a Pokemon."""
 
     id: int
     name: str
     order: int
     sprites: dict
-    stats: list[StatInfo]
-    types: list[TypeInfo]
+    stats: list[Stat]
+    types: list[Type]
 
 
 class EffectEntry(TypedDict):
@@ -71,14 +71,7 @@ class EffectEntry(TypedDict):
 
 
 class Item(TypedDict):
-    """Item information."""
-
-    name: str
-    url: str
-
-
-class ItemInfo(TypedDict):
-    """Detailed information about an item."""
+    """Represents detailed information about an item."""
 
     id: int
     name: str
@@ -87,19 +80,19 @@ class ItemInfo(TypedDict):
     sprites: dict[str, str]
 
 
-class BerryInfo(TypedDict):
+class Berry(TypedDict):
     """Represents information about a berry."""
 
     id: int
     name: str
-    item: Type
+    item: TypeBase
 
 
-class BerryItemInfo(TypedDict):
+class BerryItem(TypedDict):
     """Represents detailed information about a berry and its corresponding item."""
 
-    berry: BerryInfo
-    item: ItemInfo
+    berry: Berry
+    item: Item
 
 
 class HtmxHttpRequest(HttpRequest):

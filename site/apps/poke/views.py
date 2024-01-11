@@ -23,7 +23,7 @@ from apps.poke.utils.requests import (
 )
 
 if TYPE_CHECKING:
-    from apps.poke._types import BerryItemInfo, HtmxHttpRequest, PokemonInfo
+    from apps.poke._types import BerryItem, HtmxHttpRequest, Pokemon
 
 logger = logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ class PokedexView(ListView):
             return ['pokedex.html#pokemon-list']
         return ['pokedex.html']
 
-    def get_queryset(self) -> list[PokemonInfo]:
+    def get_queryset(self) -> list[Pokemon]:
         """Returns list of Pokémon for displaying the Pokémon.
 
         If the list is not present in the cache, retrieves it and caches the
@@ -70,11 +70,11 @@ class PokedexView(ListView):
 
         return pokemon_info_list
 
-    def filter_pokemon_by_name(self, pokemon_info_list: list[PokemonInfo], query: str) -> list[PokemonInfo]:
+    def filter_pokemon_by_name(self, pokemon_info_list: list[Pokemon], query: str) -> list[Pokemon]:
         query = query.lower()
         return [pokemon_info for pokemon_info in pokemon_info_list if query in pokemon_info['name'].lower()]
 
-    async def retrieve_pokemon_info_list(self) -> list[PokemonInfo]:
+    async def retrieve_pokemon_info_list(self) -> list[Pokemon]:
         """Asynchronously retrieves the list of Pokémon information.
 
         Uses the :func:`retrieve_pokemon_list` function to get the list of
@@ -137,7 +137,7 @@ class BerriesView(TemplateView):
     ) -> HttpResponse:
         context = self.get_context_data(**kwargs)
 
-        berry_items_info: list[BerryItemInfo] | None = cache.get('berry_items_info')
+        berry_items_info: list[BerryItem] | None = cache.get('berry_items_info')
 
         if berry_items_info is None:
             berry_items_info = async_to_sync(self.retrieve_berry_items_info)()
@@ -147,7 +147,7 @@ class BerriesView(TemplateView):
 
         return self.render_to_response(context)
 
-    async def retrieve_berry_items_info(self) -> list[BerryItemInfo]:
+    async def retrieve_berry_items_info(self) -> list[BerryItem]:
         """Asynchronously retrieves the list of Berries information.
 
         Uses the :func:`retrieve_berries` function to get the list of

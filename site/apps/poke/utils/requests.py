@@ -8,13 +8,7 @@ import aiohttp
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from apps.poke._types import (
-        BerryInfo,
-        BerryItemInfo,
-        ItemInfo,
-        PokemonInfo,
-        PokemonList,
-    )
+    from apps.poke._types import Berry, BerryItem, Item, Pokemon, PokemonList
 
 POKEMON_API = 'https://pokeapi.co/api/v2/'
 POKEMON_ENDPOINT = f'{POKEMON_API}pokemon/'
@@ -52,14 +46,13 @@ async def retrieve_berries(*, limit: int = -1, offset: int = 0) -> PokemonList:
             return await resp.json()
 
 
-async def retrieve_pokemon(pokemon: str | int) -> PokemonInfo:
+async def retrieve_pokemon(pokemon: str | int) -> Pokemon:
     """Retrieves information about a specific Pokemon from the Poke API."""
     async with aiohttp.ClientSession() as session:
-        async with session.get(f'{POKEMON_ENDPOINT}{pokemon}') as resp:
-            return await resp.json()
+        return await _retrieve_pokemon(session, pokemon)
 
 
-async def _retrieve_pokemon(session: aiohttp.ClientSession, pokemon: str | int) -> PokemonInfo:
+async def _retrieve_pokemon(session: aiohttp.ClientSession, pokemon: str | int) -> Pokemon:
     """Retrieves Pokemon information from the Poke API.
 
     Used for fetching multiple Pokemon concurrently.
@@ -68,7 +61,7 @@ async def _retrieve_pokemon(session: aiohttp.ClientSession, pokemon: str | int) 
         return await resp.json()
 
 
-async def _retrieve_berry(session: aiohttp.ClientSession, berry: str | int) -> BerryInfo:
+async def _retrieve_berry(session: aiohttp.ClientSession, berry: str | int) -> Berry:
     """Retrieves berry information from the Poke API.
 
     Used for fetching multiple berries concurrently.
@@ -77,7 +70,7 @@ async def _retrieve_berry(session: aiohttp.ClientSession, berry: str | int) -> B
         return await resp.json()
 
 
-async def _retrieve_item(session: aiohttp.ClientSession, item: str | int) -> ItemInfo:
+async def _retrieve_item(session: aiohttp.ClientSession, item: str | int) -> Item:
     """Retrieves item information from the Poke API.
 
     Used for fetching multiple items concurrently.
@@ -86,7 +79,7 @@ async def _retrieve_item(session: aiohttp.ClientSession, item: str | int) -> Ite
         return await resp.json()
 
 
-async def _retrieve_berry_item(session: aiohttp.ClientSession, berry: str | int) -> BerryItemInfo:
+async def _retrieve_berry_item(session: aiohttp.ClientSession, berry: str | int) -> BerryItem:
     """Retrieves detailed berry and associated item info from the Poke API.
 
     Used for fetching multiple berries concurrently. Session must be provided.
@@ -100,7 +93,7 @@ async def _retrieve_berry_item(session: aiohttp.ClientSession, berry: str | int)
     }
 
 
-async def retrieve_multiple_pokemon(pokemon: Sequence[str | int]) -> list[PokemonInfo]:
+async def retrieve_multiple_pokemon(pokemon: Sequence[str | int]) -> list[Pokemon]:
     """Retrieves detailed information about multiple Pokemon from the Poke API."""
     assert pokemon, 'The Pokemon list must not empty.'
 
@@ -109,7 +102,7 @@ async def retrieve_multiple_pokemon(pokemon: Sequence[str | int]) -> list[Pokemo
         return await asyncio.gather(*coroutines)
 
 
-async def retrieve_berry_items(berries: Sequence[str | int]) -> list[BerryItemInfo]:
+async def retrieve_berry_items(berries: Sequence[str | int]) -> list[BerryItem]:
     """Retrieves detailed info of multiple berries and associated items from the Poke API."""
     assert berries, 'The berries list must not empty.'
 
