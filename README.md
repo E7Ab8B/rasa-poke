@@ -1,22 +1,22 @@
 # Poke Chat Bot and Pokédex Web Application
 
-This project combines a chat bot for Pokémon-related queries using Rasa and a
-web application featuring a Pokédex and a list page for berries. The web
-application is built using Django and includes a chat bot widget for easy access
-to the chat bot functionality.
+This project combines a chat bot for Pokémon-related queries using Rasa and a web application featuring a Pokédex and
+a list page for berries.
+The web application is built using Django and includes a chat bot widget for easy access to the chat bot functionality.
+It utilizes HTMX for dynamic content loading and updates, and Tailwind CSS for styling.
 
 ## Features
 
 - Interactive chat bot powered by Rasa to answer Pokémon-related queries.
 - Pokédex page with detailed information about various Pokémon.
 - List page showcasing different types of berries.
-- User-friendly interface for seamless navigation and interaction.
+- Smooth and responsive experience akin to a Single Page Application.
 
 ## Running Locally
 
 ### Create env files
 
-Local environment files should be located in ``./.envs/`` directory.
+Local environment files should be located in `./.envs/` directory.
 
 Needed environment files:
 
