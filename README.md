@@ -57,3 +57,6 @@ docker-compose run --rm django rasa train --fixed-model-name model
 - [django](https://www.djangoproject.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Rasa](https://rasa.com/)
+- [htmx](https://htmx.org/)
+- [Alpine.js](https://alpinejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
