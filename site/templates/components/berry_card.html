@@ -1,9 +1,11 @@
+{% load pokemon %}
+
 <div class="flex flex-col gap-4 shadow-lg rounded-xl">
   <div class="mb-4 pt-2 pb-2">
 
     {% comment %} Sprite {% endcomment %}
-    <div class="bg-pokemon-normal/20 p-2 rounded-t-xl">
-      <img src="{{ berry_item.item.sprites.default }}"
+    <div class="bg-pokemon-normal/60 p-2 rounded-t-xl">
+      <img src="{{ berry_item.item|item_sprite }}"
            alt="{{ berry_item.berry.name.title }}"
            class="h-40 w-40 mx-auto" />
     </div>
