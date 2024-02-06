@@ -48,7 +48,7 @@ docker compose up -d
 ### Train model
 
 ```sh
-docker-compose run --rm django rasa train --fixed-model-name model
+docker-compose run --rm rasa train --fixed-model-name model
 ```
 
 ## Technologies
