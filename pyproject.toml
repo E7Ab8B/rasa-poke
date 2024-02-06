@@ -8,8 +8,8 @@ skip-string-normalization = true
 venvPath = "."
 venv = ".venv"
 pythonVersion = "3.10"
-exclude = [".venv", "**/migrations"]
-include = ["app", "django-stubs"]
+exclude = ["/app/**/migrations"]
+include = ["app"]
 
 
 [tool.pylint]
