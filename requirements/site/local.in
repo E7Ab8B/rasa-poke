@@ -1,6 +1,6 @@
 -r base.in
 
-Werkzeug==2.2.2  # https://github.com/pallets/werkzeug
+Werkzeug==3.0.3  # https://github.com/pallets/werkzeug
 
 # Django
 # ------------------------------------------------------------------------------
